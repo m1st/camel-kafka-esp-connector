@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes xmlns="http://camel.apache.org/schema/spring" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd"
+        xmlns:ns1="urn:AF_MK_Entities">
+
+    <route id="_mc_test">
+        <from uri="direct:_mc_test"/>
+        <to uri="mq:ESB.SYS.MK.SASESP.IN.RQ?exchangePattern=InOnly"/>
+        <setBody>
+            <constant><![CDATA[<result><resultCode>SUCCESS</resultCode></result>]]></constant>
+        </setBody>
+    </route>
+
+    <route id="mc_receiver">
+        <from uri="mq:ESB.SYS.MK.SASESP.IN.RQ?exchangePattern=InOnly"/>
+        <log message="Got new message from MultiKarta" loggingLevel="DEBUG"/>
+        <log message="${headers} ${body}" loggingLevel="DEBUG"/>
+
+        <doTry>
+            <log message="Validating via mc.xsd ..." loggingLevel="DEBUG"/>
+            <to uri="validator:xsd/mc.xsd"/>
+            <log message="Validation successful" loggingLevel="DEBUG"/>
+
+            <log message="Setting kafka.KEY ..." loggingLevel="DEBUG"/>
+            <setHeader headerName="kafka.KEY">
+                <xpath resultType="java.lang.String">//ns1:PAN/text()</xpath>
+            </setHeader>
+
+            <log message="Sending message to Kafka topic mc.from ..." loggingLevel="DEBUG"/>
+            <to uri="kafka:mc.from"/>
+            <log message="Successfully sent message to Kafka topic mc.from" loggingLevel="DEBUG"/>
+
+            <doCatch>
+                <exception>org.apache.camel.ValidationException</exception>
+                <log message="ERROR: ${exception}: ${headers} - ${body}" loggingLevel="ERROR"/>
+                <to uri="kafka:mc.dlq"/>
+            </doCatch>
+            <doCatch>
+                <exception>java.lang.Exception</exception>
+                <log message="ERROR: ${exception}: ${headers} - ${body}" loggingLevel="ERROR"/>
+            </doCatch>
+        </doTry>
+    </route>
+</routes>

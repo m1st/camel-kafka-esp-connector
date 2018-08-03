@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified" targetNamespace="urn:AF_MK_Entities"
+		   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:AF_MK_Entities">
+
+	<xs:complexType name="RequestType">
+		<xs:annotation>
+			<xs:documentation>Тип сообщений, приходящих от МК</xs:documentation>
+		</xs:annotation>
+
+		<xs:sequence>
+			<xs:element name="MTI" minOccurs="1" type="xs:integer"/>
+			<xs:element name="PAN" minOccurs="0" type="xs:integer"/>
+			<xs:element name="TRANCODE" minOccurs="1" type="xs:integer"/>
+			<xs:element name="FROMACCTTYPE" minOccurs="1" type="xs:integer"/>
+			<xs:element name="TOACCTTYPE" minOccurs="1" type="xs:integer"/>
+			<xs:element name="AMOUNT" minOccurs="0" type="xs:integer"/>
+			<xs:element name="AMOUNTACCT" minOccurs="0" type="xs:integer"/>
+			<xs:element name="GRDATETIME" minOccurs="1" type="xs:integer"/>
+			<xs:element name="CONVRATE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="SYSTRAN" minOccurs="1" type="xs:integer"/>
+			<xs:element name="ORIGTIME" minOccurs="0" type="xs:integer"/>
+			<xs:element name="ORIGDATE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="TERMSIC" minOccurs="1" type="xs:integer"/>
+			<xs:element name="TERMINSTCOUNTRY" minOccurs="0" type="xs:integer"/>
+			<xs:element name="POSENTRYMODE" minOccurs="1" type="xs:integer"/>
+			<xs:element name="CARDMEMBER" minOccurs="0" type="xs:integer"/>
+			<xs:element name="POSCONDITION" minOccurs="0" type="xs:integer"/>
+			<xs:element name="REASON" minOccurs="0" type="xs:integer"/>
+			<xs:element name="FEE" minOccurs="0" type="xs:token"/>
+			<xs:element name="TERMINSTID" minOccurs="1" type="xs:integer"/>
+			<xs:element name="FORWIIC" minOccurs="0" type="xs:integer"/>
+			<xs:element name="TRACK2" minOccurs="1" type="xs:token"/>
+			<xs:element name="TRANNUMBER" minOccurs="1" type="xs:token"/>
+			<xs:element name="APPROVALCODE" minOccurs="0" type="xs:token"/>
+			<xs:element name="REASON2" minOccurs="0" type="xs:integer"/>
+			<xs:element name="ICC_RESPCODE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="RETAINCARD" minOccurs="0" type="xs:integer"/>
+			<xs:element name="RESPCODE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="TERMNAME" minOccurs="0" type="xs:token"/>
+			<xs:element name="TERMOWNER" minOccurs="0" type="xs:token"/>
+			<xs:element name="TERMCITY" minOccurs="0" type="xs:token"/>
+			<xs:element name="TERMSTATE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="TERMCOUNTRY" minOccurs="0" type="xs:integer"/>
+			<xs:element name="TERMLOCATION" minOccurs="0" type="xs:token"/>
+			<xs:element name="TERMBRANCH" minOccurs="0" type="xs:token"/>
+			<xs:element name="TERMREGION" minOccurs="0" type="xs:token"/>
+			<xs:element name="TERMCLASS" minOccurs="1" type="xs:integer"/>
+			<xs:element name="TERMDATE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="TERMPSNAME" minOccurs="1" type="xs:token"/>
+			<xs:element name="TERMFINAME" minOccurs="1" type="xs:token"/>
+			<xs:element name="TERMRETAILERNAME" minOccurs="0" type="xs:token"/>
+			<xs:element name="TERMCOUNTY" minOccurs="0" type="xs:integer"/>
+			<xs:element name="TERMZIP" minOccurs="0" type="xs:integer"/>
+			<xs:element name="TERMTIMEOFFSET" minOccurs="0" type="xs:integer"/>
+			<xs:element name="PINOK" minOccurs="0" type="xs:string"/>
+			<xs:element name="CVVOK" minOccurs="0" type="xs:string"/>
+			<xs:element name="TRACK1" minOccurs="0" type="xs:token"/>
+			<xs:element name="OTHERTRANRRN" minOccurs="0" type="xs:token"/>
+			<xs:element name="OTHERTRANPAN" minOccurs="0" type="xs:token"/>
+			<xs:element name="CURRENCY" minOccurs="0" type="xs:integer"/>
+			<xs:element name="CURRENCYACCT" minOccurs="0" type="xs:integer"/>
+			<xs:element name="PIN" minOccurs="0" type="xs:token"/>
+			<xs:element name="SECCONTRINF" minOccurs="0" type="xs:token"/>
+			<xs:element name="AMOUNT2" minOccurs="0" type="xs:integer"/>
+			<xs:element name="ICCDATA" minOccurs="0" type="xs:string"/>
+			<xs:element name="ICCDATA_APPTRANSCOUNTER_9F36" minOccurs="0" type="xs:string"/>
+			<xs:element name="ICCDATA_TRANSSEQCOUNTER_9F41" minOccurs="0" type="xs:string"/>
+			<xs:element name="AUTHFINAME" minOccurs="0" type="xs:token"/>
+			<xs:element name="AUTHPSNAME" minOccurs="0" type="xs:token"/>
+			<xs:element name="EXTTRANATTR" minOccurs="0" type="xs:token"/>
+			<xs:element name="NEWPIN" minOccurs="0" type="xs:token"/>
+			<xs:element name="MAC1" minOccurs="0" type="xs:token"/>
+			<xs:element name="NETMANAGINFCODE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="REVACTUALAMOUNT" minOccurs="0" type="xs:integer"/>
+			<xs:element name="REVACTUALAMOUNTORIG" minOccurs="0" type="xs:integer"/>
+			<xs:element name="RECVINSTID" minOccurs="0" type="xs:integer"/>
+			<xs:element name="FROMACCT" minOccurs="0" type="xs:token"/>
+			<xs:element name="TOACCT" minOccurs="0" type="xs:token"/>
+			<xs:element name="HOSTNETID" minOccurs="0" type="xs:integer"/>
+			<xs:element name="LEGERBALANCE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="AVAILBALANCE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="BALANCECURRENCYACCT" minOccurs="0" type="xs:integer"/>
+			<xs:element name="CURRENCYACCTTO" minOccurs="0" type="xs:integer"/>
+			<xs:element name="CURRENCYORIG" minOccurs="0" type="xs:integer"/>
+			<xs:element name="AMOUNTACCTTO" minOccurs="0" type="xs:integer"/>
+			<xs:element name="AMOUNTORIG" minOccurs="0" type="xs:integer"/>
+			<xs:element name="EXCHANGERATEACCT" minOccurs="0" type="xs:integer"/>
+			<xs:element name="EXCHANGERATEACCTTO" minOccurs="0" type="xs:integer"/>
+			<xs:element name="FINALRRN" minOccurs="0" type="xs:token"/>
+			<xs:element name="TEXTMESS" minOccurs="0" type="xs:token"/>
+			<xs:element name="MULTIACCDATA" minOccurs="0" type="xs:token"/>
+			<xs:element name="MESSAGE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="TOACCT2" minOccurs="0" type="xs:token"/>
+			<xs:element name="TRANCATEGORY" minOccurs="0" type="xs:integer"/>
+			<xs:element name="DRAFTCAPTURE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="CVV2" minOccurs="0" type="xs:integer"/>
+			<xs:element name="CLERK" minOccurs="0" type="xs:token"/>
+			<xs:element name="INVOICENUM" minOccurs="0" type="xs:token"/>
+			<xs:element name="SEQNUM" minOccurs="0" type="xs:token"/>
+			<xs:element name="CAVV" minOccurs="0" type="xs:integer"/>
+			<xs:element name="ECAUTHRESULTCODE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="ECAUTHTRACKNUM" minOccurs="0" type="xs:integer"/>
+			<xs:element name="ECTRANID" minOccurs="0" type="xs:token"/>
+			<xs:element name="MISCTRANSATTR1" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR1_CAVVOK" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR1_TERMENTRYCAPS" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR1_TERMCONTACTLESS" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR1_ISSUERCOUNTRY" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR1_ISSUERCARDBRAND" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR1_AUTHFINAME2" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR1_PAN2" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR1_CARDMEMBER2" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR1_RESPCODE" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR1_P2PSEN_1" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR1_P2PSEN_4" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR1_P2PSEN_12_11_13" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR1_P2PSEN_15_14_16" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR1_TERMZIP" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR1_EXTTRANNUMBER" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR1_DEBITRRN" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR1_CATLEVEL" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR1_WALLETDATA" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR1_CBAMOUNT" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR2" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_DECLINEREASON" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_EXTRESPCODE" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_AUTHRESPTEXT" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_ADDBAL" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_ADDBAL_AVBAL" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR2_ADDBAL_AVBALBEF" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR2_MPI" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR2_OFPRISKLEVEL" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR2_TERMADD_FID" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR2_TERMADD_SMID" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_TERMADD_DWO" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_TOKEND_DEVTYPE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR2_TOKEND_DEVID" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_TOKEND_DEVNUM" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_TOKEND_DEVNAME" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_TOKEND_DEVLOC" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_TOKEND_DEVIP" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_TOKEND_DEVLANG" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_TOKEND_TREFID" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_TOKEND_TREQID" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_TOKEND_TSCORE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR2_TOKEND_WPRAV" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_TOKEND_WPDEVSC" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR2_TOKEND_WPACCSC" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_TRANCOND3DSEC" minOccurs="0" type="xs:string"/>
+			<xs:element name="ORIGINALINVOICENUM" minOccurs="0" type="xs:token"/>
+			<xs:element name="ORIGINALSEQNUM" minOccurs="0" type="xs:token"/>
+			<xs:element name="PREAUTHHOLD" minOccurs="0" type="xs:token"/>
+			<xs:element name="ADDINF" minOccurs="0" type="xs:token"/>
+			<xs:element name="MAC2" minOccurs="0" type="xs:token"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ResponseType">
+		<xs:annotation>
+			<xs:documentation>Тип сообщений из ESP</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MTI" minOccurs="1" type="xs:integer"/>
+			<xs:element name="PAN" minOccurs="0" type="xs:integer"/>
+			<xs:element name="TRANCODE" minOccurs="1" type="xs:integer"/>
+			<xs:element name="FROMACCTTYPE" minOccurs="1" type="xs:integer"/>
+			<xs:element name="TOACCTTYPE" minOccurs="1" type="xs:integer"/>
+			<xs:element name="AMOUNT" minOccurs="0" type="xs:integer"/>
+			<xs:element name="AMOUNTACCT" minOccurs="0" type="xs:integer"/>
+			<xs:element name="GRDATETIME" minOccurs="1" type="xs:integer"/>
+			<xs:element name="CONVRATE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="SYSTRAN" minOccurs="1" type="xs:integer"/>
+			<xs:element name="ORIGTIME" minOccurs="0" type="xs:integer"/>
+			<xs:element name="ORIGDATE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="TERMSIC" minOccurs="0" type="xs:integer"/>
+			<xs:element name="TERMINSTCOUNTRY" minOccurs="0" type="xs:integer"/>
+			<xs:element name="POSENTRYMODE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="CARDMEMBER" minOccurs="0" type="xs:integer"/>
+			<xs:element name="POSCONDITION" minOccurs="0" type="xs:integer"/>
+			<xs:element name="REASON" minOccurs="0" type="xs:integer"/>
+			<xs:element name="FEE" minOccurs="0" type="xs:token"/>
+			<xs:element name="TERMINSTID" minOccurs="1" type="xs:integer"/>
+			<xs:element name="FORWIIC" minOccurs="0" type="xs:integer"/>
+			<xs:element name="TRACK2" minOccurs="1" type="xs:token"/>
+			<xs:element name="TRANNUMBER" minOccurs="1" type="xs:token"/>
+			<xs:element name="APPROVALCODE" minOccurs="0" type="xs:token"/>
+			<xs:element name="REASON2" minOccurs="1" type="xs:integer"/>
+			<xs:element name="ICC_RESPCODE" minOccurs="1" type="xs:integer"/>
+			<xs:element name="RETAINCARD" minOccurs="1" type="xs:integer"/>
+			<xs:element name="RESPCODE" minOccurs="1" type="xs:integer"/>
+			<xs:element name="TERMNAME" minOccurs="0" type="xs:token"/>
+			<xs:element name="TERMOWNER" minOccurs="0" type="xs:token"/>
+			<xs:element name="TERMCITY" minOccurs="0" type="xs:token"/>
+			<xs:element name="TERMSTATE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="TERMCOUNTRY" minOccurs="0" type="xs:integer"/>
+			<xs:element name="TERMLOCATION" minOccurs="0" type="xs:token"/>
+			<xs:element name="TERMBRANCH" minOccurs="0" type="xs:token"/>
+			<xs:element name="TERMREGION" minOccurs="0" type="xs:token"/>
+			<xs:element name="TERMCLASS" minOccurs="0" type="xs:integer"/>
+			<xs:element name="TERMDATE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="TERMPSNAME" minOccurs="0" type="xs:token"/>
+			<xs:element name="TERMFINAME" minOccurs="0" type="xs:token"/>
+			<xs:element name="TERMRETAILERNAME" minOccurs="0" type="xs:token"/>
+			<xs:element name="TERMCOUNTY" minOccurs="0" type="xs:integer"/>
+			<xs:element name="TERMZIP" minOccurs="0" type="xs:integer"/>
+			<xs:element name="TERMTIMEOFFSET" minOccurs="0" type="xs:integer"/>
+			<xs:element name="PINOK" minOccurs="0" type="xs:string"/>
+			<xs:element name="CVVOK" minOccurs="0" type="xs:string"/>
+			<xs:element name="TRACK1" minOccurs="0" type="xs:token"/>
+			<xs:element name="OTHERTRANRRN" minOccurs="0" type="xs:token"/>
+			<xs:element name="OTHERTRANPAN" minOccurs="0" type="xs:token"/>
+			<xs:element name="CURRENCY" minOccurs="0" type="xs:integer"/>
+			<xs:element name="CURRENCYACCT" minOccurs="0" type="xs:integer"/>
+			<xs:element name="PIN" minOccurs="0" type="xs:token"/>
+			<xs:element name="SECCONTRINF" minOccurs="0" type="xs:token"/>
+			<xs:element name="AMOUNT2" minOccurs="0" type="xs:integer"/>
+			<xs:element name="ICCDATA" minOccurs="0" type="xs:string"/>
+			<xs:element name="ICCDATA_APPTRANSCOUNTER_9F36" minOccurs="0" type="xs:string"/>
+			<xs:element name="ICCDATA_TRANSSEQCOUNTER_9F41" minOccurs="0" type="xs:string"/>
+			<xs:element name="AUTHFINAME" minOccurs="0" type="xs:token"/>
+			<xs:element name="AUTHPSNAME" minOccurs="0" type="xs:token"/>
+			<xs:element name="EXTTRANATTR" minOccurs="0" type="xs:token"/>
+			<xs:element name="NEWPIN" minOccurs="0" type="xs:token"/>
+			<xs:element name="MAC1" minOccurs="0" type="xs:token"/>
+			<xs:element name="NETMANAGINFCODE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="REVACTUALAMOUNT" minOccurs="0" type="xs:integer"/>
+			<xs:element name="REVACTUALAMOUNTORIG" minOccurs="0" type="xs:integer"/>
+			<xs:element name="RECVINSTID" minOccurs="0" type="xs:integer"/>
+			<xs:element name="FROMACCT" minOccurs="0" type="xs:token"/>
+			<xs:element name="TOACCT" minOccurs="0" type="xs:token"/>
+			<xs:element name="HOSTNETID" minOccurs="0" type="xs:integer"/>
+			<xs:element name="LEGERBALANCE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="AVAILBALANCE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="BALANCECURRENCYACCT" minOccurs="0" type="xs:integer"/>
+			<xs:element name="CURRENCYACCTTO" minOccurs="0" type="xs:integer"/>
+			<xs:element name="CURRENCYORIG" minOccurs="0" type="xs:integer"/>
+			<xs:element name="AMOUNTACCTTO" minOccurs="0" type="xs:integer"/>
+			<xs:element name="AMOUNTORIG" minOccurs="0" type="xs:integer"/>
+			<xs:element name="EXCHANGERATEACCT" minOccurs="0" type="xs:integer"/>
+			<xs:element name="EXCHANGERATEACCTTO" minOccurs="0" type="xs:integer"/>
+			<xs:element name="FINALRRN" minOccurs="0" type="xs:token"/>
+			<xs:element name="TEXTMESS" minOccurs="0" type="xs:token"/>
+			<xs:element name="MULTIACCDATA" minOccurs="0" type="xs:token"/>
+			<xs:element name="MESSAGE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="TOACCT2" minOccurs="0" type="xs:token"/>
+			<xs:element name="TRANCATEGORY" minOccurs="0" type="xs:integer"/>
+			<xs:element name="DRAFTCAPTURE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="CVV2" minOccurs="0" type="xs:integer"/>
+			<xs:element name="CLERK" minOccurs="0" type="xs:token"/>
+			<xs:element name="INVOICENUM" minOccurs="0" type="xs:token"/>
+			<xs:element name="SEQNUM" minOccurs="0" type="xs:token"/>
+			<xs:element name="CAVV" minOccurs="0" type="xs:integer"/>
+			<xs:element name="ECAUTHRESULTCODE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="ECAUTHTRACKNUM" minOccurs="0" type="xs:integer"/>
+			<xs:element name="ECTRANID" minOccurs="0" type="xs:token"/>
+			<xs:element name="MISCTRANSATTR1" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR1_CAVVOK" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR1_TERMENTRYCAPS" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR1_TERMCONTACTLESS" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR1_ISSUERCOUNTRY" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR1_ISSUERCARDBRAND" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR1_AUTHFINAME2" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR1_PAN2" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR1_CARDMEMBER2" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR1_RESPCODE" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR1_P2PSEN_1" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR1_P2PSEN_4" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR1_P2PSEN_12_11_13" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR1_P2PSEN_15_14_16" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR1_TERMZIP" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR1_EXTTRANNUMBER" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR1_DEBITRRN" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR1_CATLEVEL" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR1_WALLETDATA" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR1_CBAMOUNT" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR2" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_DECLINEREASON" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_EXTRESPCODE" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_AUTHRESPTEXT" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_ADDBAL" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_ADDBAL_AVBAL" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR2_ADDBAL_AVBALBEF" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR2_MPI" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR2_OFPRISKLEVEL" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR2_TERMADD_FID" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR2_TERMADD_SMID" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_TERMADD_DWO" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_TOKEND_DEVTYPE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR2_TOKEND_DEVID" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_TOKEND_DEVNUM" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_TOKEND_DEVNAME" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_TOKEND_DEVLOC" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_TOKEND_DEVIP" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_TOKEND_DEVLANG" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_TOKEND_TREFID" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_TOKEND_TREQID" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_TOKEND_TSCORE" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR2_TOKEND_WPRAV" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_TOKEND_WPDEVSC" minOccurs="0" type="xs:integer"/>
+			<xs:element name="MISCTRANSATTR2_TOKEND_WPACCSC" minOccurs="0" type="xs:string"/>
+			<xs:element name="MISCTRANSATTR2_TRANCOND3DSEC" minOccurs="0" type="xs:string"/>
+			<xs:element name="ORIGINALINVOICENUM" minOccurs="0" type="xs:token"/>
+			<xs:element name="ORIGINALSEQNUM" minOccurs="0" type="xs:token"/>
+			<xs:element name="PREAUTHHOLD" minOccurs="0" type="xs:token"/>
+			<xs:element name="ADDINF" minOccurs="0" type="xs:token"/>
+			<xs:element name="MAC2" minOccurs="0" type="xs:token"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AuthorizationRequest">
+		<xs:annotation>
+			<xs:documentation>Запрос на проверку авторизации от МК</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:RequestType"/>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="AuthorizationResponse">
+		<xs:annotation>
+			<xs:documentation>Ответ от ESP по результатам проверки авторизации</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:ResponseType"/>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="AuthorizationAdviceRequest">
+		<xs:annotation>
+			<xs:documentation>Сообщение от МК с результатом выполнения операции</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:RequestType"/>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="AuthorizationAdviceResponse">
+		<xs:annotation>
+			<xs:documentation>Уведомление о получении сообщения с результатом выполнения
+				операции</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:ResponseType"/>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="AuthorizationRequest" type="tns:AuthorizationRequest">
+		<xs:annotation>
+			<xs:documentation>Сообщение об авторизации от МК</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="AuthorizationResponse" type="tns:AuthorizationResponse">
+		<xs:annotation>
+			<xs:documentation>Ответ от ESP по результатам проверки авторизации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="AuthorizationAdviceRequest" type="tns:AuthorizationAdviceRequest">
+		<xs:annotation>
+			<xs:documentation>Сообщение от МК с результатом выполнения операции</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="AuthorizationAdviceResponse" type="tns:AuthorizationAdviceResponse">
+		<xs:annotation>
+			<xs:documentation>Уведомление о получении сообщения с результатом выполнения
+				операции</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+</xs:schema>

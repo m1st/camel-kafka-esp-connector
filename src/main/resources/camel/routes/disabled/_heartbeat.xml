@@ -1,0 +1,10 @@
+<routes xmlns="http://camel.apache.org/schema/spring">
+    <route id="heartbeat">
+        <from uri="timer://heartbeat?period=5s"/>
+        <log message="Heartbeat fired."/>
+        <setBody>
+            <constant>{"component": "rest_consumer", "state": "OK"}</constant>
+        </setBody>
+        <to uri="kafka:heartbeat_?brokers={{kafka.brokers}}"/>
+    </route>
+</routes>
