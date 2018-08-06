@@ -13,8 +13,6 @@
             <groovy>
                 def newBody = request.body
                 newBody['opcode'] = 'P'
-                newBody['_key'] = request.body['JMSMessageID']
-                newBody['_ts'] = request.body['JMSTimestamp']
                 return newBody
             </groovy>
         </transform>

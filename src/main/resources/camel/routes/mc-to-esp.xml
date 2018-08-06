@@ -3,7 +3,7 @@
         xsi:schemaLocation="http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
     <route id="mc_to_esp">
-        <from uri="kafka:mc.from?consumersCount=10"/>
+        <from uri="kafka:mc.from?groupId=mc_consumers"/>
         <log message="${headers} ${body}" loggingLevel="DEBUG"/>
 
         <doTry>
@@ -16,17 +16,16 @@
                 <groovy>
                     def newBody = request.body
                     newBody['opcode'] = 'P'
-                    newBody['_key'] = newBody['SYSTRAN']
                     return newBody
                 </groovy>
             </transform>
-            <log message="${headers} ${body}"/>
+            <log message="${headers} ${body}" loggingLevel="DEBUG"/>
 
             <to uri="{{mc.esp.uri}}"/>
 
             <doCatch>
                 <exception>java.lang.Exception</exception>
-                <rollback/>
+                <log message="ERROR: ${exception}: ${headers} - ${body}" loggingLevel="ERROR"/>
             </doCatch>
         </doTry>
     </route>

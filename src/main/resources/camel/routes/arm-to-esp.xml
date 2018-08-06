@@ -14,8 +14,6 @@
                 def newBody = request.body["PaymentStatus"]["MessageInfo"]
                 newBody.putAll(request.body["PaymentStatus"]["Payment"])
                 newBody['opcode'] = 'P'
-                newBody['_key'] = request.body['SYSTRAN']
-                newBody['_ts'] = request.body['ResponseGenerationTime']
                 return newBody
             </groovy>
         </transform>
