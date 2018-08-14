@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="extsasespout" xmlns:tns="extsasespout">
+
+	<xsd:element name="CardBlockUnblockAntiFraudRq" type="tns:CardBlockUnblockAntiFraudRq">
+		<xsd:annotation>
+			<xsd:appinfo source="WMQI_APPINFO">
+				<MRMessage messageDefinition="/0/CardBlockUnblockAntiFraudRq;XSDElementDeclaration=3$MRObject"/>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:complexType name="CardBlockUnblockAntiFraudRq">
+		<xsd:all>
+			<xsd:element name="BLOCKTYPE" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
+			<xsd:element name="BLOCKMODE" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
+			<xsd:element name="CARDNO" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
+			<xsd:element name="REASON" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="true"/>
+			<xsd:element name="COMMENT" type="xsd:string" maxOccurs="1" minOccurs="0" nillable="true"/>
+			<xsd:element name="INITIATOR" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false" default="Отдел противодействия мошенничеству"/>
+			<xsd:element name="SYSTEMINITIATOR" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="true" default="SAS ESP"/>
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:element name="CardBlockUnblockAntiFraudRs" type="tns:CardBlockUnblockAntiFraudRs">
+		<xsd:annotation>
+			<xsd:appinfo source="WMQI_APPINFO">
+				<MRMessage messageDefinition="/0/CardBlockUnblockAntiFraudRs;XSDElementDeclaration=3$MRObject"/>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:complexType name="CardBlockUnblockAntiFraudRs">
+		<xsd:all maxOccurs="1" minOccurs="1">
+			<xsd:element name="ResultCode" type="xsd:int" maxOccurs="1" minOccurs="1" nillable="false"/>
+			<xsd:element name="ResultCodeDesc" type="xsd:string" maxOccurs="1" minOccurs="0" nillable="true"/>
+			<xsd:element name="CARDNO" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
+			<xsd:element name="CurrentCardStatus" type="xsd:string" maxOccurs="1" minOccurs="0" nillable="false"/>
+			<xsd:element name="CurrentCardStatusDesc" type="xsd:string" maxOccurs="1" minOccurs="0" nillable="true"/>
+		</xsd:all>
+	</xsd:complexType>
+
+</xsd:schema>

@@ -1,0 +1,7 @@
+<rests xmlns="http://camel.apache.org/schema/spring">
+    <rest consumes="text/xml" produces="text/xml">
+        <post uri="/mc/from">
+            <to uri="direct:_mc_test"/>
+        </post>
+    </rest>
+</rests>

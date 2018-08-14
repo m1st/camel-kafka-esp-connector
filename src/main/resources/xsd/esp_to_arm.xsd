@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified" targetNamespace="http://pochtabank.ru/sas/esp/"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:ent="urn:AF_ARM_Entities"
+           xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/">
+    <xs:import namespace="urn:AF_ARM_Entities" schemaLocation="AF_ARM_Entities.xsd"/>
+    <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+
+    <xs:element name="AddPayment">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="MessageInfo" nillable="false" type="ent:RequestMessageInfo"/>
+                <xs:element name="Payment" nillable="false" type="ent:Payment"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="PaymentStatus">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="MessageInfo" nillable="false" type="ent:ResponseMessageInfo"/>
+                <xs:element name="Payment" type="ent:PaymentStatusType" minOccurs="0"  nillable="false"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

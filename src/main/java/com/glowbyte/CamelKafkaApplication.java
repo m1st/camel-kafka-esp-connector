@@ -55,6 +55,12 @@ public class CamelKafkaApplication {
         return new EspComponent();
     }
 
+
+    @Bean(name="exPr")
+    public ExceptionProcessor exPr() {
+        return new ExceptionProcessor();
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(CamelKafkaApplication.class, args);
     }

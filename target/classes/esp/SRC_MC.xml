@@ -1,0 +1,665 @@
+<project name="SRC_MC" threads="4" pubsub="manual" heartbeat-interval="1">
+    <contqueries>
+        <contquery name="cqFromMC" timing-threshold="100" trace="srcFromMC cpMC_24Hour srcPartyXCard joinClientParty cmpAddFields">
+            <windows>
+                <window-source pubsub="true" name="srcFromMC">
+                    <schema>
+                        <fields>
+                            <field name="MTI" type="int32"/>
+                            <field name="PAN" type="string" key="true"/>
+                            <field name="PROCCODE" type="int32"/>
+                            <field name="TRANCODE" type="int32"/>
+                            <field name="FROMACCTTYPE" type="int32"/>
+                            <field name="TOACCTTYPE" type="int32"/>
+                            <field name="AMOUNT" type="int64"/>
+                            <field name="AMOUNTACCT" type="int64"/>
+                            <field name="GRDATETIME" type="int64"/>
+                            <field name="CONVRATE" type="double"/>
+                            <field name="SYSTRAN" type="int64" key="true"/>
+                            <field name="ORIGTIME" type="int32"/>
+                            <field name="ORIGDATE" type="int32"/>
+                            <field name="TERMSIC" type="int32"/>
+                            <field name="TERMINSTCOUNTRY" type="int32"/>
+                            <field name="POSENTRYMODE" type="int32"/>
+                            <field name="CARDMEMBER" type="int32"/>
+                            <field name="POSCONDITION" type="int32"/>
+                            <field name="REASON" type="int32"/>
+                            <field name="FEE" type="string"/>
+                            <field name="TERMINSTID" type="int64"/>
+                            <field name="FORWIIC" type="int64"/>
+                            <field name="TRACK2" type="string"/>
+                            <field name="TRANNUMBER" type="string"/>
+                            <field name="APPROVALCODE" type="string"/>
+                            <field name="REASON2" type="int32"/>
+                            <field name="ICC_RESPCODE" type="int32"/>
+                            <field name="RETAINCARD" type="int32"/>
+                            <field name="RESPCODE" type="int32"/>
+                            <field name="TERMNAME" type="string"/>
+                            <field name="CARDACCEPT" type="string"/>
+                            <field name="TERMOWNER" type="string"/>
+                            <field name="TERMCITY" type="string"/>
+                            <field name="TERMSTATE" type="int32"/>
+                            <field name="TERMCOUNTRY" type="int32"/>
+                            <field name="TERMLOCATION" type="string"/>
+                            <field name="TERMBRANCH" type="string"/>
+                            <field name="TERMREGION" type="string"/>
+                            <field name="TERMCLASS" type="int32"/>
+                            <field name="TERMDATE" type="int32"/>
+                            <field name="TERMPSNAME" type="int32"/>
+                            <field name="TERMFINAME" type="int32"/>
+                            <field name="TERMRETAILERNAME" type="int32"/>
+                            <field name="TERMCOUNTY" type="int32"/>
+                            <field name="TERMZIP" type="int32"/>
+                            <field name="TERMTIMEOFFSET" type="int32"/>
+                            <field name="PINCVVRES" type="string"/>
+                            <field name="PINOK" type="string"/>
+                            <field name="CVVOK" type="string"/>
+                            <field name="TRACK1" type="string"/>
+                            <field name="REFOTHERTRAN" type="string"/>
+                            <field name="OTHERTRANRRN" type="string"/>
+                            <field name="OTHERTRANPAN" type="string"/>
+                            <field name="CURRENCY" type="int32"/>
+                            <field name="CURRENCYACCT" type="int32"/>
+                            <field name="PIN" type="string"/>
+                            <field name="SECCONTRINF" type="string"/>
+                            <field name="AMOUNT2" type="int64"/>
+                            <field name="ICCDATA" type="string"/>
+                            <field name="CARDISSDATA" type="string"/>
+                            <field name="AUTHFINAME" type="string"/>
+                            <field name="AUTHPSNAME" type="string"/>
+                            <field name="EXTTRANATTR" type="string"/>
+                            <field name="NEWPIN" type="string"/>
+                            <field name="MAC1" type="string"/>
+                            <field name="NETMANAGINFCODE" type="int32"/>
+                            <field name="REVAMOUNT" type="int32"/>
+                            <field name="REVACTUALAMOUNT" type="int32"/>
+                            <field name="REVACTUALAMOUNTORIG" type="int32"/>
+                            <field name="RECVINSTID" type="int32"/>
+                            <field name="FROMACCT" type="string"/>
+                            <field name="TOACCT" type="string"/>
+                            <field name="HOSTNETID" type="int32"/>
+                            <field name="CURRACCBAL" type="int32"/>
+                            <field name="LEGERBALANCE" type="int32"/>
+                            <field name="AVAILBALANCE" type="int32"/>
+                            <field name="BALANCECURRENCYACCT" type="int32"/>
+                            <field name="MULTICURDATA" type="int32"/>
+                            <field name="CURRENCYACCTTO" type="int32"/>
+                            <field name="CURRENCYORIG" type="int32"/>
+                            <field name="AMOUNTACCTTO" type="int32"/>
+                            <field name="AMOUNTORIG" type="int32"/>
+                            <field name="EXCHANGERATEACCT" type="int32"/>
+                            <field name="EXCHANGERATEACCTTO" type="int32"/>
+                            <field name="FINALRRN" type="string"/>
+                            <field name="TEXTMESS" type="string"/>
+                            <field name="MULTIACCDATA" type="string"/>
+                            <field name="MULTIACCLENGTH" type="int32"/>
+                            <field name="TYPE" type="int32"/>
+                            <field name="ACCT" type="int32"/>
+                            <field name="TITLE" type="string"/>
+                            <field name="CURRENCY2" type="int32"/>
+                            <field name="MESSAGE" type="int32"/>
+                            <field name="TOACCT2" type="string"/>
+                            <field name="STATEMENT" type="string"/>
+                            <field name="STATEDATA" type="string"/>
+                            <field name="BILLDATA" type="string"/>
+                            <field name="ADDPOSDATA" type="string"/>
+                            <field name="TRANCATEGORY" type="int32"/>
+                            <field name="DRAFTCAPTURE" type="int32"/>
+                            <field name="CVV2" type="int32"/>
+                            <field name="CLERK" type="string"/>
+                            <field name="INVOICENUM" type="string"/>
+                            <field name="SEQNUM" type="string"/>
+                            <field name="SECDATA" type="string"/>
+                            <field name="CAVV" type="int32"/>
+                            <field name="ECAUTHRESULTCODE" type="int32"/>
+                            <field name="ECAUTHTRACKNUM" type="int32"/>
+                            <field name="ECTRANID" type="string"/>
+                            <field name="MISCTRANSATTR1" type="string"/>
+                            <field name="MISCTRANSATTR2" type="string"/>
+                            <field name="ADMINTRANDATA" type="string"/>
+                            <field name="PREAUTHDATA" type="string"/>
+                            <field name="ORIGINALINVOICENUM" type="string"/>
+                            <field name="ORIGINALSEQNUM" type="string"/>
+                            <field name="PREAUTHHOLD" type="string"/>
+                            <field name="ADDINF" type="string"/>
+                            <field name="MAC2" type="string"/>
+                        </fields>
+                    </schema>
+                    <retention type="bytime_sliding"><![CDATA[24 hours]]></retention>
+                </window-source>
+                <window-source pubsub="true" name="srcPartyXCard">
+                    <schema>
+                        <fields>
+                            <field name="card_number" type="string" key="true"/>
+                            <field name="party_number" type="string"/>
+                        </fields>
+                    </schema>
+                    <connectors>
+                        <connector class="db" name="connPartyXCard">
+                            <properties>
+                                <property name="type"><![CDATA[pub]]></property>
+                                <property name="blocksize"><![CDATA[10]]></property>
+                                <property name="selectstatement"><![CDATA[select card_number, party_number from v_party_x_card]]></property>
+                                <property name="publishwithupsert"><![CDATA[true]]></property>
+                                <property name="connectstring"><![CDATA[DSN=Oracle Wire Protocol;UID=sas_esp;PWD=tjRavX33Rl_X]]></property>
+                            </properties>
+                        </connector>
+                    </connectors>
+                </window-source>
+                <window-join pubsub="true" name="joinClientParty">
+                    <join type="inner">
+                        <conditions>
+                            <fields left="PAN" right="card_number"/>
+                        </conditions>
+                    </join>
+                    <output>
+                        <left-select>'*'</left-select>
+                        <field-selection name="PARTY_NUMBER" source="r_party_number"/>
+                    </output>
+                </window-join>
+                <window-copy pubsub="true" name="cpOut"/>
+                <window-compute pubsub="true" index="pi_EMPTY" name="cmpAdditional2">
+                    <schema>
+                        <fields>
+                            <field name="TRANSACTION_REFERENCE_NUMBER" type="string"/>
+                            <field name="MTI" type="int32"/>
+                            <field name="PAN" type="string" key="true"/>
+                            <field name="PROCCODE" type="int32"/>
+                            <field name="TRANCODE" type="int32"/>
+                            <field name="FROMACCTTYPE" type="int32"/>
+                            <field name="TOACCTTYPE" type="int32"/>
+                            <field name="AMOUNT" type="int64"/>
+                            <field name="AMOUNTACCT" type="int64"/>
+                            <field name="GRDATETIME" type="int64"/>
+                            <field name="CONVRATE" type="double"/>
+                            <field name="SYSTRAN" type="int64" key="true"/>
+                            <field name="ORIGTIME" type="int32"/>
+                            <field name="ORIGDATE" type="int32"/>
+                            <field name="TERMSIC" type="int32"/>
+                            <field name="TERMINSTCOUNTRY" type="int32"/>
+                            <field name="POSENTRYMODE" type="int32"/>
+                            <field name="CARDMEMBER" type="int32"/>
+                            <field name="POSCONDITION" type="int32"/>
+                            <field name="REASON" type="int32"/>
+                            <field name="FEE" type="string"/>
+                            <field name="TERMINSTID" type="int64"/>
+                            <field name="FORWIIC" type="int64"/>
+                            <field name="TRACK2" type="string"/>
+                            <field name="TRANNUMBER" type="string"/>
+                            <field name="APPROVALCODE" type="string"/>
+                            <field name="REASON2" type="int32"/>
+                            <field name="ICC_RESPCODE" type="int32"/>
+                            <field name="RETAINCARD" type="int32"/>
+                            <field name="RESPCODE" type="int32"/>
+                            <field name="TERMNAME" type="string"/>
+                            <field name="CARDACCEPT" type="string"/>
+                            <field name="TERMOWNER" type="string"/>
+                            <field name="TERMCITY" type="string"/>
+                            <field name="TERMSTATE" type="int32"/>
+                            <field name="TERMCOUNTRY" type="int32"/>
+                            <field name="TERMLOCATION" type="string"/>
+                            <field name="TERMBRANCH" type="string"/>
+                            <field name="TERMREGION" type="string"/>
+                            <field name="TERMCLASS" type="int32"/>
+                            <field name="TERMDATE" type="int32"/>
+                            <field name="TERMPSNAME" type="int32"/>
+                            <field name="TERMFINAME" type="int32"/>
+                            <field name="TERMRETAILERNAME" type="int32"/>
+                            <field name="TERMCOUNTY" type="int32"/>
+                            <field name="TERMZIP" type="int32"/>
+                            <field name="TERMTIMEOFFSET" type="int32"/>
+                            <field name="PINCVVRES" type="string"/>
+                            <field name="PINOK" type="string"/>
+                            <field name="CVVOK" type="string"/>
+                            <field name="TRACK1" type="string"/>
+                            <field name="REFOTHERTRAN" type="string"/>
+                            <field name="OTHERTRANRRN" type="string"/>
+                            <field name="OTHERTRANPAN" type="string"/>
+                            <field name="CURRENCY" type="int32"/>
+                            <field name="CURRENCYACCT" type="int32"/>
+                            <field name="PIN" type="string"/>
+                            <field name="SECCONTRINF" type="string"/>
+                            <field name="AMOUNT2" type="int64"/>
+                            <field name="ICCDATA" type="string"/>
+                            <field name="CARDISSDATA" type="string"/>
+                            <field name="AUTHFINAME" type="string"/>
+                            <field name="AUTHPSNAME" type="string"/>
+                            <field name="EXTTRANATTR" type="string"/>
+                            <field name="NEWPIN" type="string"/>
+                            <field name="MAC1" type="string"/>
+                            <field name="NETMANAGINFCODE" type="int32"/>
+                            <field name="REVAMOUNT" type="int32"/>
+                            <field name="REVACTUALAMOUNT" type="int32"/>
+                            <field name="REVACTUALAMOUNTORIG" type="int32"/>
+                            <field name="RECVINSTID" type="int32"/>
+                            <field name="FROMACCT" type="string"/>
+                            <field name="TOACCT" type="string"/>
+                            <field name="HOSTNETID" type="int32"/>
+                            <field name="CURRACCBAL" type="int32"/>
+                            <field name="LEGERBALANCE" type="int32"/>
+                            <field name="AVAILBALANCE" type="int32"/>
+                            <field name="BALANCECURRENCYACCT" type="int32"/>
+                            <field name="MULTICURDATA" type="int32"/>
+                            <field name="CURRENCYACCTTO" type="int32"/>
+                            <field name="CURRENCYORIG" type="int32"/>
+                            <field name="AMOUNTACCTTO" type="int32"/>
+                            <field name="AMOUNTORIG" type="int32"/>
+                            <field name="EXCHANGERATEACCT" type="int32"/>
+                            <field name="EXCHANGERATEACCTTO" type="int32"/>
+                            <field name="FINALRRN" type="string"/>
+                            <field name="TEXTMESS" type="string"/>
+                            <field name="MULTIACCDATA" type="string"/>
+                            <field name="MULTIACCLENGTH" type="int32"/>
+                            <field name="TYPE" type="int32"/>
+                            <field name="ACCT" type="int32"/>
+                            <field name="TITLE" type="string"/>
+                            <field name="CURRENCY2" type="int32"/>
+                            <field name="MESSAGE" type="int32"/>
+                            <field name="TOACCT2" type="string"/>
+                            <field name="STATEMENT" type="string"/>
+                            <field name="STATEDATA" type="string"/>
+                            <field name="BILLDATA" type="string"/>
+                            <field name="ADDPOSDATA" type="string"/>
+                            <field name="TRANCATEGORY" type="int32"/>
+                            <field name="DRAFTCAPTURE" type="int32"/>
+                            <field name="CVV2" type="int32"/>
+                            <field name="CLERK" type="string"/>
+                            <field name="INVOICENUM" type="string"/>
+                            <field name="SEQNUM" type="string"/>
+                            <field name="SECDATA" type="string"/>
+                            <field name="CAVV" type="int32"/>
+                            <field name="ECAUTHRESULTCODE" type="int32"/>
+                            <field name="ECAUTHTRACKNUM" type="int32"/>
+                            <field name="ECTRANID" type="string"/>
+                            <field name="MISCTRANSATTR1" type="string"/>
+                            <field name="MISCTRANSATTR2" type="string"/>
+                            <field name="ADMINTRANDATA" type="string"/>
+                            <field name="PREAUTHDATA" type="string"/>
+                            <field name="ORIGINALINVOICENUM" type="string"/>
+                            <field name="ORIGINALSEQNUM" type="string"/>
+                            <field name="PREAUTHHOLD" type="string"/>
+                            <field name="ADDINF" type="string"/>
+                            <field name="MAC2" type="string"/>
+                            <field name="PAYMENT_DATE" type="date"/>
+                            <field name="AMOUNT_RUB" type="double"/>
+                        </fields>
+                    </schema>
+                    <output>
+                        <field-expr><![CDATA[formatdate(PAYMENT_DATE, "YYYYMMDDhhmmss") & SYSTRAN & "_1_" & left(FEE, 1)]]></field-expr>
+                        <field-expr><![CDATA[MTI]]></field-expr>
+                        <field-expr><![CDATA[PROCCODE]]></field-expr>
+                        <field-expr><![CDATA[TRANCODE]]></field-expr>
+                        <field-expr><![CDATA[FROMACCTTYPE]]></field-expr>
+                        <field-expr><![CDATA[TOACCTTYPE]]></field-expr>
+                        <field-expr><![CDATA[AMOUNT]]></field-expr>
+                        <field-expr><![CDATA[AMOUNTACCT]]></field-expr>
+                        <field-expr><![CDATA[GRDATETIME]]></field-expr>
+                        <field-expr><![CDATA[CONVRATE]]></field-expr>
+                        <field-expr><![CDATA[ORIGTIME]]></field-expr>
+                        <field-expr><![CDATA[ORIGDATE]]></field-expr>
+                        <field-expr><![CDATA[TERMSIC]]></field-expr>
+                        <field-expr><![CDATA[TERMINSTCOUNTRY]]></field-expr>
+                        <field-expr><![CDATA[POSENTRYMODE]]></field-expr>
+                        <field-expr><![CDATA[CARDMEMBER]]></field-expr>
+                        <field-expr><![CDATA[POSCONDITION]]></field-expr>
+                        <field-expr><![CDATA[REASON]]></field-expr>
+                        <field-expr><![CDATA[FEE]]></field-expr>
+                        <field-expr><![CDATA[TERMINSTID]]></field-expr>
+                        <field-expr><![CDATA[FORWIIC]]></field-expr>
+                        <field-expr><![CDATA[TRACK2]]></field-expr>
+                        <field-expr><![CDATA[TRANNUMBER]]></field-expr>
+                        <field-expr><![CDATA[APPROVALCODE]]></field-expr>
+                        <field-expr><![CDATA[REASON2]]></field-expr>
+                        <field-expr><![CDATA[ICC_RESPCODE]]></field-expr>
+                        <field-expr><![CDATA[RETAINCARD]]></field-expr>
+                        <field-expr><![CDATA[RESPCODE]]></field-expr>
+                        <field-expr><![CDATA[TERMNAME]]></field-expr>
+                        <field-expr><![CDATA[CARDACCEPT]]></field-expr>
+                        <field-expr><![CDATA[TERMOWNER]]></field-expr>
+                        <field-expr><![CDATA[TERMCITY]]></field-expr>
+                        <field-expr><![CDATA[TERMSTATE]]></field-expr>
+                        <field-expr><![CDATA[TERMCOUNTRY]]></field-expr>
+                        <field-expr><![CDATA[TERMLOCATION]]></field-expr>
+                        <field-expr><![CDATA[TERMBRANCH]]></field-expr>
+                        <field-expr><![CDATA[TERMREGION]]></field-expr>
+                        <field-expr><![CDATA[TERMCLASS]]></field-expr>
+                        <field-expr><![CDATA[TERMDATE]]></field-expr>
+                        <field-expr><![CDATA[TERMPSNAME]]></field-expr>
+                        <field-expr><![CDATA[TERMFINAME]]></field-expr>
+                        <field-expr><![CDATA[TERMRETAILERNAME]]></field-expr>
+                        <field-expr><![CDATA[TERMCOUNTY]]></field-expr>
+                        <field-expr><![CDATA[TERMZIP]]></field-expr>
+                        <field-expr><![CDATA[TERMTIMEOFFSET]]></field-expr>
+                        <field-expr><![CDATA[PINCVVRES]]></field-expr>
+                        <field-expr><![CDATA[PINOK]]></field-expr>
+                        <field-expr><![CDATA[CVVOK]]></field-expr>
+                        <field-expr><![CDATA[TRACK1]]></field-expr>
+                        <field-expr><![CDATA[REFOTHERTRAN]]></field-expr>
+                        <field-expr><![CDATA[OTHERTRANRRN]]></field-expr>
+                        <field-expr><![CDATA[OTHERTRANPAN]]></field-expr>
+                        <field-expr><![CDATA[CURRENCY]]></field-expr>
+                        <field-expr><![CDATA[CURRENCYACCT]]></field-expr>
+                        <field-expr><![CDATA[PIN]]></field-expr>
+                        <field-expr><![CDATA[SECCONTRINF]]></field-expr>
+                        <field-expr><![CDATA[AMOUNT2]]></field-expr>
+                        <field-expr>ICCDATA</field-expr>
+                        <field-expr><![CDATA[CARDISSDATA]]></field-expr>
+                        <field-expr><![CDATA[AUTHFINAME]]></field-expr>
+                        <field-expr><![CDATA[AUTHPSNAME]]></field-expr>
+                        <field-expr><![CDATA[EXTTRANATTR]]></field-expr>
+                        <field-expr><![CDATA[NEWPIN]]></field-expr>
+                        <field-expr><![CDATA[MAC1]]></field-expr>
+                        <field-expr><![CDATA[NETMANAGINFCODE]]></field-expr>
+                        <field-expr><![CDATA[REVAMOUNT]]></field-expr>
+                        <field-expr><![CDATA[REVACTUALAMOUNT]]></field-expr>
+                        <field-expr><![CDATA[REVACTUALAMOUNTORIG]]></field-expr>
+                        <field-expr><![CDATA[RECVINSTID]]></field-expr>
+                        <field-expr><![CDATA[FROMACCT]]></field-expr>
+                        <field-expr><![CDATA[TOACCT]]></field-expr>
+                        <field-expr><![CDATA[HOSTNETID]]></field-expr>
+                        <field-expr><![CDATA[CURRACCBAL]]></field-expr>
+                        <field-expr><![CDATA[LEGERBALANCE]]></field-expr>
+                        <field-expr><![CDATA[AVAILBALANCE]]></field-expr>
+                        <field-expr><![CDATA[BALANCECURRENCYACCT]]></field-expr>
+                        <field-expr><![CDATA[MULTICURDATA]]></field-expr>
+                        <field-expr><![CDATA[CURRENCYACCTTO]]></field-expr>
+                        <field-expr><![CDATA[CURRENCYORIG]]></field-expr>
+                        <field-expr><![CDATA[AMOUNTACCTTO]]></field-expr>
+                        <field-expr><![CDATA[AMOUNTORIG]]></field-expr>
+                        <field-expr><![CDATA[EXCHANGERATEACCT]]></field-expr>
+                        <field-expr><![CDATA[EXCHANGERATEACCTTO]]></field-expr>
+                        <field-expr><![CDATA[FINALRRN]]></field-expr>
+                        <field-expr><![CDATA[TEXTMESS]]></field-expr>
+                        <field-expr>MULTIACCDATA</field-expr>
+                        <field-expr><![CDATA[MULTIACCLENGTH]]></field-expr>
+                        <field-expr><![CDATA[TYPE]]></field-expr>
+                        <field-expr><![CDATA[ACCT]]></field-expr>
+                        <field-expr><![CDATA[TITLE]]></field-expr>
+                        <field-expr><![CDATA[CURRENCY2]]></field-expr>
+                        <field-expr><![CDATA[MESSAGE]]></field-expr>
+                        <field-expr><![CDATA[TOACCT2]]></field-expr>
+                        <field-expr><![CDATA[STATEMENT]]></field-expr>
+                        <field-expr><![CDATA[STATEDATA]]></field-expr>
+                        <field-expr><![CDATA[BILLDATA]]></field-expr>
+                        <field-expr><![CDATA[ADDPOSDATA]]></field-expr>
+                        <field-expr><![CDATA[TRANCATEGORY]]></field-expr>
+                        <field-expr><![CDATA[DRAFTCAPTURE]]></field-expr>
+                        <field-expr><![CDATA[CVV2]]></field-expr>
+                        <field-expr><![CDATA[CLERK]]></field-expr>
+                        <field-expr><![CDATA[INVOICENUM]]></field-expr>
+                        <field-expr><![CDATA[SEQNUM]]></field-expr>
+                        <field-expr>SECDATA</field-expr>
+                        <field-expr><![CDATA[CAVV]]></field-expr>
+                        <field-expr><![CDATA[ECAUTHRESULTCODE]]></field-expr>
+                        <field-expr><![CDATA[ECAUTHTRACKNUM]]></field-expr>
+                        <field-expr><![CDATA[ECTRANID]]></field-expr>
+                        <field-expr><![CDATA[MISCTRANSATTR1]]></field-expr>
+                        <field-expr><![CDATA[MISCTRANSATTR2]]></field-expr>
+                        <field-expr><![CDATA[ADMINTRANDATA]]></field-expr>
+                        <field-expr><![CDATA[PREAUTHDATA]]></field-expr>
+                        <field-expr><![CDATA[ORIGINALINVOICENUM]]></field-expr>
+                        <field-expr><![CDATA[ORIGINALSEQNUM]]></field-expr>
+                        <field-expr><![CDATA[PREAUTHHOLD]]></field-expr>
+                        <field-expr><![CDATA[ADDINF]]></field-expr>
+                        <field-expr><![CDATA[MAC2]]></field-expr>
+                        <field-expr><![CDATA[PAYMENT_DATE]]></field-expr>
+                        <field-expr><![CDATA[AMOUNT_RUB]]></field-expr>
+                    </output>
+                </window-compute>
+                <window-compute pubsub="true" index="pi_EMPTY" name="cmpAdditional1">
+                    <schema>
+                        <fields>
+                            <field name="MTI" type="int32"/>
+                            <field name="PAN" type="string" key="true"/>
+                            <field name="PROCCODE" type="int32"/>
+                            <field name="TRANCODE" type="int32"/>
+                            <field name="FROMACCTTYPE" type="int32"/>
+                            <field name="TOACCTTYPE" type="int32"/>
+                            <field name="AMOUNT" type="int64"/>
+                            <field name="AMOUNTACCT" type="int64"/>
+                            <field name="GRDATETIME" type="int64"/>
+                            <field name="CONVRATE" type="double"/>
+                            <field name="SYSTRAN" type="int64" key="true"/>
+                            <field name="ORIGTIME" type="int32"/>
+                            <field name="ORIGDATE" type="int32"/>
+                            <field name="TERMSIC" type="int32"/>
+                            <field name="TERMINSTCOUNTRY" type="int32"/>
+                            <field name="POSENTRYMODE" type="int32"/>
+                            <field name="CARDMEMBER" type="int32"/>
+                            <field name="POSCONDITION" type="int32"/>
+                            <field name="REASON" type="int32"/>
+                            <field name="FEE" type="string"/>
+                            <field name="TERMINSTID" type="int64"/>
+                            <field name="FORWIIC" type="int64"/>
+                            <field name="TRACK2" type="string"/>
+                            <field name="TRANNUMBER" type="string"/>
+                            <field name="APPROVALCODE" type="string"/>
+                            <field name="REASON2" type="int32"/>
+                            <field name="ICC_RESPCODE" type="int32"/>
+                            <field name="RETAINCARD" type="int32"/>
+                            <field name="RESPCODE" type="int32"/>
+                            <field name="TERMNAME" type="string"/>
+                            <field name="CARDACCEPT" type="string"/>
+                            <field name="TERMOWNER" type="string"/>
+                            <field name="TERMCITY" type="string"/>
+                            <field name="TERMSTATE" type="int32"/>
+                            <field name="TERMCOUNTRY" type="int32"/>
+                            <field name="TERMLOCATION" type="string"/>
+                            <field name="TERMBRANCH" type="string"/>
+                            <field name="TERMREGION" type="string"/>
+                            <field name="TERMCLASS" type="int32"/>
+                            <field name="TERMDATE" type="int32"/>
+                            <field name="TERMPSNAME" type="int32"/>
+                            <field name="TERMFINAME" type="int32"/>
+                            <field name="TERMRETAILERNAME" type="int32"/>
+                            <field name="TERMCOUNTY" type="int32"/>
+                            <field name="TERMZIP" type="int32"/>
+                            <field name="TERMTIMEOFFSET" type="int32"/>
+                            <field name="PINCVVRES" type="string"/>
+                            <field name="PINOK" type="string"/>
+                            <field name="CVVOK" type="string"/>
+                            <field name="TRACK1" type="string"/>
+                            <field name="REFOTHERTRAN" type="string"/>
+                            <field name="OTHERTRANRRN" type="string"/>
+                            <field name="OTHERTRANPAN" type="string"/>
+                            <field name="CURRENCY" type="int32"/>
+                            <field name="CURRENCYACCT" type="int32"/>
+                            <field name="PIN" type="string"/>
+                            <field name="SECCONTRINF" type="string"/>
+                            <field name="AMOUNT2" type="int64"/>
+                            <field name="ICCDATA" type="string"/>
+                            <field name="CARDISSDATA" type="string"/>
+                            <field name="AUTHFINAME" type="string"/>
+                            <field name="AUTHPSNAME" type="string"/>
+                            <field name="EXTTRANATTR" type="string"/>
+                            <field name="NEWPIN" type="string"/>
+                            <field name="MAC1" type="string"/>
+                            <field name="NETMANAGINFCODE" type="int32"/>
+                            <field name="REVAMOUNT" type="int32"/>
+                            <field name="REVACTUALAMOUNT" type="int32"/>
+                            <field name="REVACTUALAMOUNTORIG" type="int32"/>
+                            <field name="RECVINSTID" type="int32"/>
+                            <field name="FROMACCT" type="string"/>
+                            <field name="TOACCT" type="string"/>
+                            <field name="HOSTNETID" type="int32"/>
+                            <field name="CURRACCBAL" type="int32"/>
+                            <field name="LEGERBALANCE" type="int32"/>
+                            <field name="AVAILBALANCE" type="int32"/>
+                            <field name="BALANCECURRENCYACCT" type="int32"/>
+                            <field name="MULTICURDATA" type="int32"/>
+                            <field name="CURRENCYACCTTO" type="int32"/>
+                            <field name="CURRENCYORIG" type="int32"/>
+                            <field name="AMOUNTACCTTO" type="int32"/>
+                            <field name="AMOUNTORIG" type="int32"/>
+                            <field name="EXCHANGERATEACCT" type="int32"/>
+                            <field name="EXCHANGERATEACCTTO" type="int32"/>
+                            <field name="FINALRRN" type="string"/>
+                            <field name="TEXTMESS" type="string"/>
+                            <field name="MULTIACCDATA" type="string"/>
+                            <field name="MULTIACCLENGTH" type="int32"/>
+                            <field name="TYPE" type="int32"/>
+                            <field name="ACCT" type="int32"/>
+                            <field name="TITLE" type="string"/>
+                            <field name="CURRENCY2" type="int32"/>
+                            <field name="MESSAGE" type="int32"/>
+                            <field name="TOACCT2" type="string"/>
+                            <field name="STATEMENT" type="string"/>
+                            <field name="STATEDATA" type="string"/>
+                            <field name="BILLDATA" type="string"/>
+                            <field name="ADDPOSDATA" type="string"/>
+                            <field name="TRANCATEGORY" type="int32"/>
+                            <field name="DRAFTCAPTURE" type="int32"/>
+                            <field name="CVV2" type="int32"/>
+                            <field name="CLERK" type="string"/>
+                            <field name="INVOICENUM" type="string"/>
+                            <field name="SEQNUM" type="string"/>
+                            <field name="SECDATA" type="string"/>
+                            <field name="CAVV" type="int32"/>
+                            <field name="ECAUTHRESULTCODE" type="int32"/>
+                            <field name="ECAUTHTRACKNUM" type="int32"/>
+                            <field name="ECTRANID" type="string"/>
+                            <field name="MISCTRANSATTR1" type="string"/>
+                            <field name="MISCTRANSATTR2" type="string"/>
+                            <field name="ADMINTRANDATA" type="string"/>
+                            <field name="PREAUTHDATA" type="string"/>
+                            <field name="ORIGINALINVOICENUM" type="string"/>
+                            <field name="ORIGINALSEQNUM" type="string"/>
+                            <field name="PREAUTHHOLD" type="string"/>
+                            <field name="ADDINF" type="string"/>
+                            <field name="MAC2" type="string"/>
+                            <field name="PAYMENT_DATE" type="date"/>
+                            <field name="AMOUNT_RUB" type="double"/>
+                        </fields>
+                    </schema>
+                    <output>
+                        <field-expr><![CDATA[MTI]]></field-expr>
+                        <field-expr><![CDATA[PROCCODE]]></field-expr>
+                        <field-expr><![CDATA[TRANCODE]]></field-expr>
+                        <field-expr><![CDATA[FROMACCTTYPE]]></field-expr>
+                        <field-expr><![CDATA[TOACCTTYPE]]></field-expr>
+                        <field-expr><![CDATA[AMOUNT]]></field-expr>
+                        <field-expr><![CDATA[AMOUNTACCT]]></field-expr>
+                        <field-expr><![CDATA[GRDATETIME]]></field-expr>
+                        <field-expr><![CDATA[CONVRATE]]></field-expr>
+                        <field-expr><![CDATA[ORIGTIME]]></field-expr>
+                        <field-expr><![CDATA[ORIGDATE]]></field-expr>
+                        <field-expr><![CDATA[TERMSIC]]></field-expr>
+                        <field-expr><![CDATA[TERMINSTCOUNTRY]]></field-expr>
+                        <field-expr><![CDATA[POSENTRYMODE]]></field-expr>
+                        <field-expr><![CDATA[CARDMEMBER]]></field-expr>
+                        <field-expr><![CDATA[POSCONDITION]]></field-expr>
+                        <field-expr><![CDATA[REASON]]></field-expr>
+                        <field-expr><![CDATA[FEE]]></field-expr>
+                        <field-expr><![CDATA[TERMINSTID]]></field-expr>
+                        <field-expr><![CDATA[FORWIIC]]></field-expr>
+                        <field-expr><![CDATA[TRACK2]]></field-expr>
+                        <field-expr><![CDATA[TRANNUMBER]]></field-expr>
+                        <field-expr><![CDATA[APPROVALCODE]]></field-expr>
+                        <field-expr><![CDATA[REASON2]]></field-expr>
+                        <field-expr><![CDATA[ICC_RESPCODE]]></field-expr>
+                        <field-expr><![CDATA[RETAINCARD]]></field-expr>
+                        <field-expr><![CDATA[RESPCODE]]></field-expr>
+                        <field-expr><![CDATA[TERMNAME]]></field-expr>
+                        <field-expr><![CDATA[CARDACCEPT]]></field-expr>
+                        <field-expr><![CDATA[TERMOWNER]]></field-expr>
+                        <field-expr><![CDATA[TERMCITY]]></field-expr>
+                        <field-expr><![CDATA[TERMSTATE]]></field-expr>
+                        <field-expr><![CDATA[TERMCOUNTRY]]></field-expr>
+                        <field-expr><![CDATA[TERMLOCATION]]></field-expr>
+                        <field-expr><![CDATA[TERMBRANCH]]></field-expr>
+                        <field-expr><![CDATA[TERMREGION]]></field-expr>
+                        <field-expr><![CDATA[TERMCLASS]]></field-expr>
+                        <field-expr><![CDATA[TERMDATE]]></field-expr>
+                        <field-expr><![CDATA[TERMPSNAME]]></field-expr>
+                        <field-expr><![CDATA[TERMFINAME]]></field-expr>
+                        <field-expr><![CDATA[TERMRETAILERNAME]]></field-expr>
+                        <field-expr><![CDATA[TERMCOUNTY]]></field-expr>
+                        <field-expr><![CDATA[TERMZIP]]></field-expr>
+                        <field-expr><![CDATA[TERMTIMEOFFSET]]></field-expr>
+                        <field-expr><![CDATA[PINCVVRES]]></field-expr>
+                        <field-expr><![CDATA[PINOK]]></field-expr>
+                        <field-expr><![CDATA[CVVOK]]></field-expr>
+                        <field-expr><![CDATA[TRACK1]]></field-expr>
+                        <field-expr><![CDATA[REFOTHERTRAN]]></field-expr>
+                        <field-expr><![CDATA[OTHERTRANRRN]]></field-expr>
+                        <field-expr><![CDATA[OTHERTRANPAN]]></field-expr>
+                        <field-expr><![CDATA[CURRENCY]]></field-expr>
+                        <field-expr><![CDATA[CURRENCYACCT]]></field-expr>
+                        <field-expr><![CDATA[PIN]]></field-expr>
+                        <field-expr><![CDATA[SECCONTRINF]]></field-expr>
+                        <field-expr><![CDATA[AMOUNT2]]></field-expr>
+                        <field-expr>ICCDATA</field-expr>
+                        <field-expr><![CDATA[CARDISSDATA]]></field-expr>
+                        <field-expr><![CDATA[AUTHFINAME]]></field-expr>
+                        <field-expr><![CDATA[AUTHPSNAME]]></field-expr>
+                        <field-expr><![CDATA[EXTTRANATTR]]></field-expr>
+                        <field-expr><![CDATA[NEWPIN]]></field-expr>
+                        <field-expr><![CDATA[MAC1]]></field-expr>
+                        <field-expr><![CDATA[NETMANAGINFCODE]]></field-expr>
+                        <field-expr><![CDATA[REVAMOUNT]]></field-expr>
+                        <field-expr><![CDATA[REVACTUALAMOUNT]]></field-expr>
+                        <field-expr><![CDATA[REVACTUALAMOUNTORIG]]></field-expr>
+                        <field-expr><![CDATA[RECVINSTID]]></field-expr>
+                        <field-expr><![CDATA[FROMACCT]]></field-expr>
+                        <field-expr><![CDATA[TOACCT]]></field-expr>
+                        <field-expr><![CDATA[HOSTNETID]]></field-expr>
+                        <field-expr><![CDATA[CURRACCBAL]]></field-expr>
+                        <field-expr><![CDATA[LEGERBALANCE]]></field-expr>
+                        <field-expr><![CDATA[AVAILBALANCE]]></field-expr>
+                        <field-expr><![CDATA[BALANCECURRENCYACCT]]></field-expr>
+                        <field-expr><![CDATA[MULTICURDATA]]></field-expr>
+                        <field-expr><![CDATA[CURRENCYACCTTO]]></field-expr>
+                        <field-expr><![CDATA[CURRENCYORIG]]></field-expr>
+                        <field-expr><![CDATA[AMOUNTACCTTO]]></field-expr>
+                        <field-expr><![CDATA[AMOUNTORIG]]></field-expr>
+                        <field-expr><![CDATA[EXCHANGERATEACCT]]></field-expr>
+                        <field-expr><![CDATA[EXCHANGERATEACCTTO]]></field-expr>
+                        <field-expr><![CDATA[FINALRRN]]></field-expr>
+                        <field-expr><![CDATA[TEXTMESS]]></field-expr>
+                        <field-expr>MULTIACCDATA</field-expr>
+                        <field-expr><![CDATA[MULTIACCLENGTH]]></field-expr>
+                        <field-expr><![CDATA[TYPE]]></field-expr>
+                        <field-expr><![CDATA[ACCT]]></field-expr>
+                        <field-expr><![CDATA[TITLE]]></field-expr>
+                        <field-expr><![CDATA[CURRENCY2]]></field-expr>
+                        <field-expr><![CDATA[MESSAGE]]></field-expr>
+                        <field-expr><![CDATA[TOACCT2]]></field-expr>
+                        <field-expr><![CDATA[STATEMENT]]></field-expr>
+                        <field-expr><![CDATA[STATEDATA]]></field-expr>
+                        <field-expr><![CDATA[BILLDATA]]></field-expr>
+                        <field-expr><![CDATA[ADDPOSDATA]]></field-expr>
+                        <field-expr><![CDATA[TRANCATEGORY]]></field-expr>
+                        <field-expr><![CDATA[DRAFTCAPTURE]]></field-expr>
+                        <field-expr><![CDATA[CVV2]]></field-expr>
+                        <field-expr><![CDATA[CLERK]]></field-expr>
+                        <field-expr><![CDATA[INVOICENUM]]></field-expr>
+                        <field-expr><![CDATA[SEQNUM]]></field-expr>
+                        <field-expr>SECDATA</field-expr>
+                        <field-expr><![CDATA[CAVV]]></field-expr>
+                        <field-expr><![CDATA[ECAUTHRESULTCODE]]></field-expr>
+                        <field-expr><![CDATA[ECAUTHTRACKNUM]]></field-expr>
+                        <field-expr><![CDATA[ECTRANID]]></field-expr>
+                        <field-expr><![CDATA[MISCTRANSATTR1]]></field-expr>
+                        <field-expr><![CDATA[MISCTRANSATTR2]]></field-expr>
+                        <field-expr><![CDATA[ADMINTRANDATA]]></field-expr>
+                        <field-expr><![CDATA[PREAUTHDATA]]></field-expr>
+                        <field-expr><![CDATA[ORIGINALINVOICENUM]]></field-expr>
+                        <field-expr><![CDATA[ORIGINALSEQNUM]]></field-expr>
+                        <field-expr><![CDATA[PREAUTHHOLD]]></field-expr>
+                        <field-expr><![CDATA[ADDINF]]></field-expr>
+                        <field-expr><![CDATA[MAC2]]></field-expr>
+                        <field-expr><![CDATA[today()]]></field-expr>
+                        <field-expr><![CDATA[AMOUNT/100]]></field-expr>
+                    </output>
+                </window-compute>
+            </windows>
+            <edges>
+                <edge source="joinClientParty" target="cpOut"/>
+                <edge source="cmpAdditional2" target="joinClientParty"/>
+                <edge source="srcPartyXCard" target="joinClientParty"/>
+                <edge source="srcFromMC" target="cmpAdditional1"/>
+                <edge source="cmpAdditional1" target="cmpAdditional2"/>
+            </edges>
+        </contquery>
+    </contqueries>
+</project>
