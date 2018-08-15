@@ -5,72 +5,24 @@
 <routes xmlns="http://camel.apache.org/schema/spring" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-    <route id="arm_to_esp">
+    <!--
+    <route id="kafka_to_ibm">
+
         <from uri="kafka:arm.to"/>
-        <log message="message for arm was get: ${headers} ${body}" loggingLevel="DEBUG"/>
-        <log message="message for arm was get: Topic: ${header.kafka.TOPIC} Partition: ${header.kafka.PARTITION_ID} Offset: ${header.kafka.OFFSET}" loggingLevel="INFO"/>
 
-
-        <!--
-        <doTry>
-            <log message="Validating via esp_to_arn.xsd ..." loggingLevel="INFO"/>
-            <to uri="validator:xsd/esp_to_arm.xsd"/>
-            <log message="Validation successful" loggingLevel="INFO"/>
-
-            <doCatch>
-                <exception>org.apache.camel.ValidationException</exception>
-                <log message="ERROR: ${exception}: ${headers} - ${body}" loggingLevel="ERROR"/>
-            </doCatch>
-            <doCatch>
-                <exception>java.lang.Exception</exception>
-                <log message="ERROR: ${exception}: ${headers} - ${body}" loggingLevel="ERROR"/>
-            </doCatch>
-        </doTry>
--->
-
-        <onException>
-            <exception>org.apache.camel.processor.validation.SchemaValidationException</exception>
-            <log message="Problems with validate" loggingLevel="ERROR"/>
-        </onException>
-
-        <onException>
-            <exception>org.springframework.jms.IllegalStateException</exception>
-            <redeliveryPolicy maximumRedeliveries="3"/>
-            <log message="Problems with sending message in mq from kafka" loggingLevel="ERROR"/>
-        </onException>
-
-        <onException>
-            <exception>java.lang.Exception</exception>
-            <log message="Other problems" loggingLevel="ERROR"/>
-        </onException>
-
-
-
-        <!--
-        <onException>
-            <exception>java.lang.Exception</exception>
-            <redeliveryPolicy maximumRedeliveries="2"/>
-
-        </onException>
-        -->
-
-
-
-        <!-- <doTry> -->
-
-        <to uri="validator:xsd/esp_to_arm.xsd"/>
         <to uri="jms:DEV.QUEUE.1"/>
 
 
+    </route>
+-->
 
-<!--
-            <doCatch>
-                <exception>java.lang.Exception</exception>
-                <log message="ERROR while sending message from kafka to arm: ${exception}: ${headers} - ${body}" loggingLevel="ERROR"/>
-            </doCatch>
+    <route id="ibm_to_kafka">
 
-        </doTry>
-        -->
+        <from uri="jms:DEV.QUEUE.2"/>
+
+        <to uri="kafka:arm.from"/>
+
 
     </route>
+
 </routes>

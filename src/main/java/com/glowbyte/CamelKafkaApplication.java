@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.jms.connection.JmsTransactionManager;
 
 import javax.jms.ConnectionFactory;
 
@@ -43,12 +44,19 @@ public class CamelKafkaApplication {
         return cf;
     }
 
-    @Bean(name = "jms")
+    /*@Bean(name="transactionManager")
+    public JmsTransactionManager jmsTransactionManager()
+    {
+
+    }*/
+
+    /*@Bean(name = "jms")
     public JmsComponent mqJmsComponent() {
         JmsComponent jmsc = new JmsComponent();
         jmsc.setConnectionFactory(getMQConnFactory());
+        jmsc.setTransacted(true);
         return jmsc;
-    }
+    }*/
 
     @Bean(name="esp")
     public EspComponent espComponent() {
@@ -56,10 +64,7 @@ public class CamelKafkaApplication {
     }
 
 
-    @Bean(name="exPr")
-    public ExceptionProcessor exPr() {
-        return new ExceptionProcessor();
-    }
+
 
     public static void main(String[] args) {
         SpringApplication.run(CamelKafkaApplication.class, args);
