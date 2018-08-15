@@ -22,7 +22,8 @@
 
 
 
-        <to uri="kafka:arm.from"/>
+        <to uri="kafka:arm.from2"/>
+        <!--<throwException exceptionType="java.lang.Exception" />-->
         <throwException exceptionType="java.lang.Exception" />
 
     </route>
