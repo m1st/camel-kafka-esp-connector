@@ -18,13 +18,19 @@
 
     <route id="ibm_to_kafka">
 
-        <from uri="jms:DEV.QUEUE.2"/>
+
+
+        <from uri="kafka:arm.to2"/>
 
 
 
-        <to uri="kafka:arm.from2"/>
-        <!--<throwException exceptionType="java.lang.Exception" />-->
-        <throwException exceptionType="java.lang.Exception" />
+        <to uri="jms:DEV.QUEUE.2"/>
+
+        <process ref="manualCommit" />
+
+
+
+
 
     </route>
 

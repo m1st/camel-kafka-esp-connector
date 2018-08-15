@@ -66,6 +66,7 @@ public class CamelKafkaApplication {
 
 
 
+
     public static void main(String[] args) {
         SpringApplication.run(CamelKafkaApplication.class, args);
     }
