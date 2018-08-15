@@ -20,8 +20,10 @@
 
         <from uri="jms:DEV.QUEUE.2"/>
 
-        <to uri="kafka:arm.from"/>
 
+
+        <to uri="kafka:arm.from"/>
+        <throwException exceptionType="java.lang.Exception" />
 
     </route>
 

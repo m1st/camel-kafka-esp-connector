@@ -4,15 +4,6 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!--
-    <bean id="connectionFactory" class="com.ibm.mq.jms.MQConnectionFactory">
-        <property name="hostName" value="${mq.broker.hostname}"/>
-        <property name="port" value="${mq.broker.port}"/>
-        <property name="queueManager" value="${mq.broker.queuemanager}"/>
-        <property name="channel" value="${mq.broker.channel}"/>
-        <property name="transportType" value="${mq.broker.transporttype}"/>
-    </bean>
--->
 
 
     <bean id="jms" class="org.apache.camel.component.jms.JmsComponent">
@@ -21,15 +12,8 @@
 
     <bean id="jmsConfig" class="org.apache.camel.component.jms.JmsConfiguration">
         <property name="connectionFactory" ref="jmsConnectionFactory" />
-        <property name="transactionManager" ref="jmsTransactionManager" />
-        <property name="transacted" value="true" />
-        <property name="cacheLevelName" value="CACHE_CONNECTION" />
     </bean>
 
-    <bean id="jmsTransactionManager"
-          class="org.springframework.jms.connection.JmsTransactionManager">
-        <property name="connectionFactory" ref="jmsConnectionFactory" />
-    </bean>
 
     <bean id="jmsConnectionFactory" class="com.ibm.mq.jms.MQConnectionFactory">
 
