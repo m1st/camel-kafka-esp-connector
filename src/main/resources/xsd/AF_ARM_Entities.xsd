@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified" targetNamespace="urn:AF_ARM_Entities"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:AF_ARM_Entities"
+	xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/">
+	<xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/"
+		schemaLocation="Serialization.xsd"/>
+
+	<xs:complexType name="RequestMessageInfo">
+		<xs:annotation>
+			<xs:documentation>Служебные заголовки сообщения</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="RequestId" type="ser:guid"/>
+			<xs:element name="RequestGenerationTime" type="xs:dateTime"/>
+		</xs:all>
+	</xs:complexType>
+
+	<xs:complexType name="Payment">
+		<xs:sequence>
+			<xs:element name="Id" type="ser:guid"/>
+			<xs:element name="PaymentDate" type="xs:dateTime"/>
+			<xs:element name="PaymentNumber" nillable="true" type="xs:string"/>
+			<xs:element name="ChequeNumber" nillable="true" type="xs:string" default="0"/>
+			<xs:element name="Service" nillable="true" type="xs:string"/>
+			<xs:element name="Client" nillable="true" type="xs:string" default="Card"/>
+			<xs:element name="Point" nillable="true" type="tns:PointType"/>
+			<xs:element name="Recipient" nillable="true" type="tns:RecipientType"/>
+			<xs:element name="Amount" type="xs:decimal"/>
+			<xs:element name="Commission" type="xs:decimal" default="0.0"/>
+			<xs:element name="Account" minOccurs="0" nillable="true" type="xs:string"/>
+			<xs:element name="ClientInfo" minOccurs="0" nillable="true" type="tns:Client"/>
+			<xs:element name="Requisites" minOccurs="0" nillable="true" type="tns:ArrayOfRequisite"/>
+			<xs:element name="Reason" minOccurs="0" nillable="true" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Client">
+		<xs:sequence>
+			<xs:element name="Id" minOccurs="0" nillable="true" type="xs:string"/>
+			<xs:element name="Phone" minOccurs="0" nillable="true" type="xs:string"/>
+			<xs:element name="Email" minOccurs="0" nillable="true" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ArrayOfRequisite">
+		<xs:sequence>
+			<xs:element name="Requisite" minOccurs="1" maxOccurs="unbounded" nillable="false" type="tns:Requisite"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Requisite">
+		<xs:sequence>
+			<xs:element name="Name" nillable="false" type="xs:token"/>
+			<xs:element name="Value" nillable="false" type="xs:string"/>
+			<xs:element name="DisplayName" minOccurs="0" nillable="false" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ResponseMessageInfo">
+		<xs:annotation>
+			<xs:documentation>Служебные заголовки сообщения</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="RequestId" type="ser:guid"/>
+			<xs:element name="ResponseId" type="ser:guid"/>
+			<xs:element name="ResponseGenerationTime" type="xs:dateTime"/>
+			<xs:element name="ResponseCode" type="tns:RespCode"/>
+			<xs:element name="ResponseDescription" nillable="true" type="xs:string"/>
+		</xs:all>
+	</xs:complexType>
+
+	<xs:simpleType name="RespCode">
+		<xs:annotation>
+			<xs:documentation>Код ответа о принятии сообщения в обработку</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="success"/>
+			<xs:enumeration value="invalid_format"/>
+			<xs:enumeration value="other_error"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="PaymentStatusType">
+		<xs:all>
+			<xs:element name="Id" nillable="false" type="ser:guid"/>
+			<xs:element name="PaymentNumber" nillable="false" type="xs:string"/>
+			<xs:element name="Status" nillable="false" type="tns:PaymentStatus"/>
+			<xs:element name="PaymentStatusChangeTime" nillable="false" type="xs:dateTime"/>
+			<xs:element name="EmployeeLogin" nillable="true" type="xs:string"/>
+		</xs:all>
+	</xs:complexType>
+
+	<xs:simpleType name="PointType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Интернет"/>
+			<xs:enumeration value="ATM"/>
+			<xs:enumeration value="POS"/>
+			<xs:enumeration value="Ручной ввод"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="RecipientType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Покупка"/>
+			<xs:enumeration value="Снятие наличных"/>
+			<xs:enumeration value="Перевод"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="PaymentStatus">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2a"/>
+			<xs:enumeration value="2b"/>
+			<xs:enumeration value="3a"/>
+			<xs:enumeration value="3b"/>
+			<xs:enumeration value="3c"/>
+			<xs:enumeration value="3d"/>
+			<xs:enumeration value="3e"/>
+			<xs:enumeration value="4a"/>
+			<xs:enumeration value="4b"/>
+			<xs:enumeration value="5a"/>
+			<xs:enumeration value="5b"/>
+			<xs:enumeration value="5c"/>
+			<xs:enumeration value="5d"/>
+			<xs:enumeration value="5e"/>
+			<xs:enumeration value="6a"/>
+			<xs:enumeration value="6b"/>
+			<xs:enumeration value="7a"/>
+			<xs:enumeration value="7b"/>
+			<xs:enumeration value="8a"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>

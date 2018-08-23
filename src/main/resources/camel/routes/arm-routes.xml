@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes xmlns="http://camel.apache.org/schema/spring" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    <route id="arm_receive">
+        <from uri="jms:{{arm.mq-queue-name.in}}?disableReplyTo=true"/>
+
+        <log message="Got new message from {{arm.mq-queue-name.in}}" loggingLevel="INFO"/>
+        <to uri="log:arm_receive?showAll=true&amp;level=DEBUG"/>
+
+        <setHeader headerName="kafka.KEY">
+            <xpath resultType="java.lang.String">//*[local-name()='PaymentNumber']/text()</xpath>
+        </setHeader>
+        <setHeader headerName="ESPFromSystem">
+            <constant>arm</constant>
+        </setHeader>
+        <to uri="direct:do_receive"/>
+    </route>
+
+    <route id="arm_transform">
+        <from uri="direct:arm_transform"/>
+        <unmarshal><jacksonxml/></unmarshal>
+        <transform>
+            <groovy>
+                def newBody = request.body['PaymentStatus']['MessageInfo']
+                newbody.putAll(request.body['PaymentStatus']['Payment'])
+
+                /* Hack for empty tags. */
+                newBody = request.body.each({ it.value = it.value.trim() }).findAll({ it.value!=null &amp;&amp; it.value!='' })
+
+                newBody['opcode'] = 'i'
+                return newBody
+            </groovy>
+        </transform>
+    </route>
+
+    <route id="_arm_test_folder">
+        <from uri="file:{{arm.test.folder.in}}?delete=true"/>
+        <log message="Got new file from {{arm.test.folder.in}}" loggingLevel="INFO"/>
+
+        <to uri="jms:{{arm.mq-queue-name.in}}"/>
+        <log message="File from {{arm.test.folder.in}} successfully put to {{arm.mq-queue-name.in}}" loggingLevel="INFO"/>
+    </route>
+
+</routes>

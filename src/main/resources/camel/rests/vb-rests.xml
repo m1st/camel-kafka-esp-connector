@@ -1,7 +1,0 @@
-<rests xmlns="http://camel.apache.org/schema/spring">
-    <rest consumes="text/xml" produces="text/plain">
-        <post uri="/vb/from">
-            <to uri="direct:_test_vb"/>
-        </post>
-    </rest>
-</rests>

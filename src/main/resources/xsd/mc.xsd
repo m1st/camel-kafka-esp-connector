@@ -9,7 +9,7 @@
 
 		<xs:sequence>
 			<xs:element name="MTI" minOccurs="1" type="xs:integer"/>
-			<xs:element name="PAN" minOccurs="0" type="xs:integer"/>
+			<xs:element name="PAN" minOccurs="0" type="xs:token"/>
 			<xs:element name="TRANCODE" minOccurs="1" type="xs:integer"/>
 			<xs:element name="FROMACCTTYPE" minOccurs="1" type="xs:integer"/>
 			<xs:element name="TOACCTTYPE" minOccurs="1" type="xs:integer"/>
@@ -161,7 +161,7 @@
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="MTI" minOccurs="1" type="xs:integer"/>
-			<xs:element name="PAN" minOccurs="0" type="xs:integer"/>
+			<xs:element name="PAN" minOccurs="0" type="xs:token"/>
 			<xs:element name="TRANCODE" minOccurs="1" type="xs:integer"/>
 			<xs:element name="FROMACCTTYPE" minOccurs="1" type="xs:integer"/>
 			<xs:element name="TOACCTTYPE" minOccurs="1" type="xs:integer"/>

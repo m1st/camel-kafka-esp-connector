@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes xmlns="http://camel.apache.org/schema/spring" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    <route id="do_receive">
+        <from uri="direct:do_receive"/>
+        <to uri="kafka:esp.integration.mc.from"/>
+
+        <!-- Hack for newlines and Xerces "Invalid UTF-8 character". -->
+        <setBody>
+            <simple>${bodyAs(String).replaceAll("\n", "").replaceAll("\r", "")}</simple>
+        </setBody>
+
+        <log message="Validating via XSD ..." loggingLevel="INFO"/>
+        <toD uri="validator:xsd/${headers.ESPFromSystem}.xsd"/>
+        <log message="Validation successful" loggingLevel="INFO"/>
+
+        <log message="Transforming message..." loggingLevel="INFO"/>
+        <toD uri="direct:${headers.ESPFromSystem}_transform"/>
+        <log message="Successfully transformed message" loggingLevel="INFO"/>
+        <to uri="log:do_receive?showAll=true&amp;level=DEBUG"/>
+
+        <log message="Sending message to Kafka topic ..." loggingLevel="INFO"/>
+        <toD uri="kafka:esp.internal.${headers.ESPFromSystem}.from"/>
+        <log message="Successfully sent message to Kafka topic esp.internal.${headers.ESPFromSystem}.from" loggingLevel="INFO"/>
+    </route>
+
+    <route id="monitor">
+        <from uri="kafka:esp.*?topicIsPattern=true"/>
+        <to uri="log:monitor?showAll=true&amp;level=INFO"/>
+        <toD uri="file:{{monitor.folder}}/$simple{headers['kafka.TOPIC']}/msg_$simple{headers['kafka.KEY']}"/>
+    </route>
+</routes>

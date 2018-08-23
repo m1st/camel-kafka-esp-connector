@@ -7,21 +7,23 @@
         <log message="${headers} ${body}" loggingLevel="DEBUG"/>
 
         <doTry>
-            <log message="Unmarshalling message from XML to POJO ..." loggingLevel="DEBUG"/>
+            <log message="Unmarshalling message from XML to POJO ..." loggingLevel="INFO"/>
             <unmarshal><jacksonxml/></unmarshal>
-            <log message="Successfully unmarshalled message" loggingLevel="DEBUG"/>
+            <log message="Successfully unmarshalled message" loggingLevel="INFO"/>
 
-            <log message="Transforming message ..." loggingLevel="DEBUG"/>
+            <log message="Transforming message ..." loggingLevel="INFO"/>
             <transform>
                 <groovy>
                     def newBody = request.body
-                    newBody['opcode'] = 'P'
+                    newBody['opcode'] = 'i'
                     return newBody
                 </groovy>
             </transform>
             <log message="${headers} ${body}" loggingLevel="DEBUG"/>
 
+            <log message="Sending message to SAS ESP..." loggingLevel="INFO"/>
             <to uri="{{mc.esp.uri}}"/>
+            <log message="Successfully sent message to SAS ESP..." loggingLevel="INFO"/>
 
             <doCatch>
                 <exception>java.lang.Exception</exception>
