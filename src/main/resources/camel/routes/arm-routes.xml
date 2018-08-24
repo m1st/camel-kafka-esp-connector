@@ -22,8 +22,8 @@
         <unmarshal><jacksonxml/></unmarshal>
         <transform>
             <groovy>
-                def newBody = request.body['PaymentStatus']['MessageInfo']
-                newbody.putAll(request.body['PaymentStatus']['Payment'])
+                def newBody = request.body['MessageInfo']
+                newbody.putAll(request.body['Payment'])
 
                 /* Hack for empty tags. */
                 newBody = request.body.each({ it.value = it.value.trim() }).findAll({ it.value!=null &amp;&amp; it.value!='' })

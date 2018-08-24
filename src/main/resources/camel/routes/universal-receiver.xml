@@ -4,16 +4,23 @@
 
     <route id="do_receive">
         <from uri="direct:do_receive"/>
-        <to uri="kafka:esp.integration.mc.from"/>
+        <toD uri="kafka:esp.integration.${headers.ESPFromSystem}.from"/>
 
         <!-- Hack for newlines and Xerces "Invalid UTF-8 character". -->
         <setBody>
             <simple>${bodyAs(String).replaceAll("\n", "").replaceAll("\r", "")}</simple>
         </setBody>
 
-        <log message="Validating via XSD ..." loggingLevel="INFO"/>
-        <toD uri="validator:xsd/${headers.ESPFromSystem}.xsd"/>
-        <log message="Validation successful" loggingLevel="INFO"/>
+        <doTry>
+            <log message="Validating via XSD ..." loggingLevel="INFO"/>
+            <toD uri="validator:xsd/${headers.ESPFromSystem}.xsd"/>
+            <log message="Validation successful" loggingLevel="INFO"/>
+        </doTry>
+        <doCatch>
+            <exception>org.apache.camel.ValidationException</exception>
+            <log message="Validation failed! Exception text follows:\n${exception}" loggingLevel="ERROR"/>
+            <toD uri="kafka:esp.integration.${headers.ESPFromSystem}.from.dlq"/>
+        </doCatch>
 
         <log message="Transforming message..." loggingLevel="INFO"/>
         <toD uri="direct:${headers.ESPFromSystem}_transform"/>
