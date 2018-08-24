@@ -4,7 +4,7 @@
 
     <route id="do_receive">
         <from uri="direct:do_receive"/>
-        <to uri="kafka:esp.integration.mc.from"/>
+        <to uri="kafka:esp.integration.ibmbus.from"/>
 
         <!-- Hack for newlines and Xerces "Invalid UTF-8 character". -->
         <setBody>
