@@ -23,7 +23,7 @@
         <transform>
             <groovy>
                 def newBody = request.body['MessageInfo']
-                newbody.putAll(request.body['Payment'])
+                newBody.putAll(request.body['Payment'])
 
                 /* Hack for empty tags. */
                 newBody = request.body.each({ it.value = it.value.trim() }).findAll({ it.value!=null &amp;&amp; it.value!='' })
@@ -34,12 +34,20 @@
         </transform>
     </route>
 
-    <route id="_arm_test_folder">
+    <route id="_arm_esp_test_folder">
         <from uri="file:{{arm.test.folder.in}}?delete=true"/>
         <log message="Got new file from {{arm.test.folder.in}}" loggingLevel="INFO"/>
 
         <to uri="jms:{{arm.mq-queue-name.in}}"/>
         <log message="File from {{arm.test.folder.in}} successfully put to {{arm.mq-queue-name.in}}" loggingLevel="INFO"/>
+    </route>
+
+    <route id="_esp_arm_test_folder">
+        <from uri="file:{{arm.test.folder.out}}?delete=true"/>
+        <log message="Got new file from {{arm.test.folder.out}}" loggingLevel="INFO"/>
+
+        <to uri="jms:{{arm.mq-queue-name.out}}"/>
+        <log message="File from {{arm.test.folder.out}} successfully put to {{arm.mq-queue-name.out}}" loggingLevel="INFO"/>
     </route>
 
 </routes>

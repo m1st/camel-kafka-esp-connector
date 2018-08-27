@@ -7,7 +7,7 @@
 			<xs:documentation>Тип сообщений, приходящих от МК</xs:documentation>
 		</xs:annotation>
 
-		<xs:sequence>
+		<xs:all>
 			<xs:element name="MTI" minOccurs="1" type="xs:integer"/>
 			<xs:element name="PAN" minOccurs="0" type="xs:token"/>
 			<xs:element name="TRANCODE" minOccurs="1" type="xs:integer"/>
@@ -152,14 +152,14 @@
 			<xs:element name="PREAUTHHOLD" minOccurs="0" type="xs:token"/>
 			<xs:element name="ADDINF" minOccurs="0" type="xs:token"/>
 			<xs:element name="MAC2" minOccurs="0" type="xs:token"/>
-		</xs:sequence>
+		</xs:all>
 	</xs:complexType>
 
 	<xs:complexType name="ResponseType">
 		<xs:annotation>
 			<xs:documentation>Тип сообщений из ESP</xs:documentation>
 		</xs:annotation>
-		<xs:sequence>
+		<xs:all>
 			<xs:element name="MTI" minOccurs="1" type="xs:integer"/>
 			<xs:element name="PAN" minOccurs="0" type="xs:token"/>
 			<xs:element name="TRANCODE" minOccurs="1" type="xs:integer"/>
@@ -304,7 +304,7 @@
 			<xs:element name="PREAUTHHOLD" minOccurs="0" type="xs:token"/>
 			<xs:element name="ADDINF" minOccurs="0" type="xs:token"/>
 			<xs:element name="MAC2" minOccurs="0" type="xs:token"/>
-		</xs:sequence>
+		</xs:all>
 	</xs:complexType>
 
 	<xs:complexType name="AuthorizationRequest">

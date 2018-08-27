@@ -14,8 +14,6 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <kotlin-version>1.2.61</kotlin-version>
-        <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
-
         <camel-version>2.22.0</camel-version>
         <spring-boot-version>2.0.4.RELEASE</spring-boot-version>
         <ibm-mq-version>9.1.0.0</ibm-mq-version>
@@ -42,54 +40,34 @@
         </dependencies>
     </dependencyManagement>
 
-    <!-- Kotlin -->
     <dependencies>
+        <!-- Kotlin -->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
+            <version>${kotlin-version}</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-reflect</artifactId>
+            <version>${kotlin-version}</version>
         </dependency>
 
         <!-- Spring Boot -->
         <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-server</artifactId>
-            <version>2.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-client</artifactId>
-            <version>2.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-undertow</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>io.undertow</groupId>
-                    <artifactId>undertow-websockets-jsr</artifactId>
-                </exclusion>
-            </exclusions>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
         <!-- JSON parser -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-groovy</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-jacksonxml</artifactId>
@@ -104,55 +82,35 @@
             <version>2.9.4.1</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-groovy</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-undertow</artifactId>
-        </dependency>
-
         <!-- Kafka -->
         <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-kafka</artifactId>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-kafka-starter</artifactId>
         </dependency>
 
-        <!-- IBM MQ -->
+        <!-- JMS / IBM MQ -->
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-jms-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>com.ibm.mq</groupId>
-            <artifactId>com.ibm.mq.allclient</artifactId>
-            <version>${ibm-mq-version}</version>
+            <artifactId>mq-jms-spring-boot-starter</artifactId>
+            <version>2.0.0</version>
         </dependency>
 
+        <!-- Hawt.io web console -->
         <!--
         <dependency>
             <groupId>io.hawt</groupId>
-            <artifactId>hawtio-springboot</artifactId>
+            <artifactId>hawtio-default</artifactId>
             <version>2.0.3</version>
-        </dependency>
-        -->
-
-        <!-- SAS ESP API -->
-        <!--
-        <dependency>
-            <groupId>com.sas.esp</groupId>
-            <artifactId>dfx-esp-api</artifactId>
-            <version>5.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sas.esp</groupId>
-            <artifactId>dfx-esp-camel</artifactId>
-            <version>5.1</version>
+            <type>war</type>
+            <scope>runtime</scope>
         </dependency>
         -->
     </dependencies>

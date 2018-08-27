@@ -15,12 +15,16 @@
             <log message="Validating via XSD ..." loggingLevel="INFO"/>
             <toD uri="validator:xsd/${headers.ESPFromSystem}.xsd"/>
             <log message="Validation successful" loggingLevel="INFO"/>
+
+            <doCatch>
+                <exception>org.apache.camel.ValidationException</exception>
+                <handled>
+                    <constant>false</constant>
+                </handled>
+                <log message="Validation failed! Exception text follows:\n${exception}" loggingLevel="ERROR"/>
+                <toD uri="kafka:esp.integration.${headers.ESPFromSystem}.from.dlq"/>
+            </doCatch>
         </doTry>
-        <doCatch>
-            <exception>org.apache.camel.ValidationException</exception>
-            <log message="Validation failed! Exception text follows:\n${exception}" loggingLevel="ERROR"/>
-            <toD uri="kafka:esp.integration.${headers.ESPFromSystem}.from.dlq"/>
-        </doCatch>
 
         <log message="Transforming message..." loggingLevel="INFO"/>
         <toD uri="direct:${headers.ESPFromSystem}_transform"/>

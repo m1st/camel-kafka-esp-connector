@@ -2,7 +2,7 @@
 <routes xmlns="http://camel.apache.org/schema/spring" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-    <route id="mc_receive">
+    <route id="mc_receive" autoStartup="false">
         <from uri="jms:{{mc.mq-queue-name.in}}?disableReplyTo=true"/>
 
         <log message="Got new message from {{mc.mq-queue-name.in}}" loggingLevel="INFO"/>
@@ -17,7 +17,7 @@
         <to uri="direct:do_receive"/>
     </route>
 
-    <route id="mc_transform">
+    <route id="mc_transform" autoStartup="false">
         <from uri="direct:mc_transform"/>
         <unmarshal><jacksonxml/></unmarshal>
         <transform>
@@ -32,7 +32,7 @@
         <marshal><json library="Fastjson"/></marshal>
     </route>
 
-    <route id="_mc_test_folder">
+    <route id="mc_test" autoStartup="false">
         <from uri="file:{{mc.test.folder.in}}?delete=true"/>
         <log message="Got new file from {{mc.test.folder.in}}" loggingLevel="INFO"/>
 
@@ -41,12 +41,46 @@
     </route>
 
     <route id="mc_answer">
-        <from uri="kafka:esp.internal.mc.to"/>
+        <from uri="kafka:esp.internal.mc.to?groupId=group1&amp;autoOffsetReset=earliest"/>
         <unmarshal><json library="Fastjson" /></unmarshal>
+        <log message="Got new message from esp.integration.mc.to" loggingLevel="INFO"/>
+        <to uri="log:mc_answer?showAll=true&amp;level=INFO"/>
 
+        <transform>
+            <groovy>
+                def xmlWriter = new StringWriter()
+                def mb = new groovy.xml.MarkupBuilder(xmlWriter)
 
+                mb.'ns0:AuthorizationResponse'('ns0': 'urn:AF_MK_Entities') {
+                    MTI(request.body.MTI)
+                    PAN(request.body.PAN)
+                    TRANCODE(request.body.TRANCODE)
+                    AMOUNT(request.body.AMOUNT)
+                    AMOUNTACCT(request.body.AMOUNTACCT)
+                    GRDATETIME(request.body.GRDATETIME)
+                    SYSTRAN(request.body.SYSTRAN)
+                    TERMSIC(request.body.TERMSIC)
+                    POSENTRYMODE(request.body.POSENTRYMODE)
+                    POSCONDITION(request.body.POSCONDITION)
+                    FEE(request.body.FEE)
+                    TERMINSTID(request.body.TERMINSTID)
+                    TRACK2(request.body.TRACK2)
+                    RESPCODE(request.body.RESPCODE)
+                    TERMNAME(request.body.TERMNAME)
+                    TERMOWNER(request.body.TERMOWNER)
+                    TERMRETAILERNAME(request.body.TERMRETAILERNAME)
+                    TERMCOUNTY(request.body.TERMCOUNTY)
+                    CURRENCY(request.body.CURRENCY)
+                    CURRENCYACCT(request.body.CURRENCYACCT)
+                    TEXTMESS(request.body.TEXTMESS)
+                }
+
+                return xmlWriter.toString()
+            </groovy>
+        </transform>
 
         <marshal><jacksonxml /></marshal>
-        <to uri="jms:{{mc.mq-queue-name.in}}"/>
+        <to uri="kafka:esp.integration.mc.to"/>
+        <to uri="jms:{{mc.mq-queue-name.out}}"/>
     </route>
 </routes>
