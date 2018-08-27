@@ -1,8 +1,5 @@
-**Профили** 
-<br/>
-запуск с профилем делается так 
-<br/>
-$ java -jar -Dspring.profiles.active=production demo-0.0.1-SNAPSHOT.jar
-<br/>
-Для создания профиля необходимо создать альтернативный application-{profile}.properties (без фигурных скобок)
-<br/>
+<p><span style="font-size: 20pt;"><strong>Приветствуем вас на проекте camel-конектор!</strong></span></p>
+<p><span style="font-size: 15pt;"><strong>1. Профили</strong></span></p>
+<p>По умолчанию свойства пишутся в application.properties<br />Можно сделать профили, в которых необходимые свойства можно переопределить (не нужно переписывать все свойства, а только необходимые)<br />Для создания профиля необходимо создать application-{profile}.properties (без фигурных скобок), где profile - это имя профиля</p>
+<p>Для того что бы использовать профиль (профили) необходимо задать переменную&nbsp;spring.profiles.active Это можно делать двумя способами:<br /><strong>1)</strong> путем передачи названия профиля через параметры JVM<br />$ java -jar -Dspring.profiles.active=production demo.jar<br /><strong>2)</strong> путем передачи названия профиля в application.properties<br />spring.profiles.active=production</p>
+<p><span style="text-decoration: underline;">Причем стоит заметить, </span>что определение свойства через параметры JVM имеет больший вес и переопределит любое свойство (в том числе application.properties), переданное через application.properties<br /><br /></p>
