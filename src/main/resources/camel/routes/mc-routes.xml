@@ -2,7 +2,7 @@
 <routes xmlns="http://camel.apache.org/schema/spring" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-    <route id="mc_receive" autoStartup="false">
+    <route id="mc_receive">
         <from uri="jms:{{mc.mq-queue-name.in}}?disableReplyTo=true"/>
 
         <log message="Got new message from {{mc.mq-queue-name.in}}" loggingLevel="INFO"/>
@@ -17,7 +17,7 @@
         <to uri="direct:do_receive"/>
     </route>
 
-    <route id="mc_transform" autoStartup="false">
+    <route id="mc_transform">
         <from uri="direct:mc_transform"/>
         <unmarshal><jacksonxml/></unmarshal>
         <transform>
@@ -32,7 +32,7 @@
         <marshal><json library="Fastjson"/></marshal>
     </route>
 
-    <route id="mc_test" autoStartup="false">
+    <route id="mc_test">
         <from uri="file:{{mc.test.folder.in}}?delete=true"/>
         <log message="Got new file from {{mc.test.folder.in}}" loggingLevel="INFO"/>
 
