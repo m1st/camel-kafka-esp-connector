@@ -203,7 +203,6 @@
             </groovy>
         </transform>
 
-        <marshal><jacksonxml /></marshal>
         <to uri="kafka:esp.integration.mc.to"/>
         <to uri="jms:{{mc.mq-queue-name.out}}"/>
     </route>

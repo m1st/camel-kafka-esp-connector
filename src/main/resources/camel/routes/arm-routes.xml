@@ -7,6 +7,7 @@
         <from uri="file:{{arm.test.folder.out}}?delete=true"/>
         <log message="Got new file from {{arm.test.folder.out}}" loggingLevel="INFO"/>
 
+        <to uri="kafka:{{kafka.integration.esp.to.arm}}"/>
         <to uri="jms:{{arm.mq-queue-name.out}}"/>
         <log message="File from {{arm.test.folder.out}} successfully put to {{arm.mq-queue-name.out}}" loggingLevel="INFO"/>
     </route>
@@ -20,19 +21,323 @@
 
         <transform>
             <groovy>
-                def xmlWriter = new StringWriter()
-                def mb = new groovy.xml.MarkupBuilder(xmlWriter)
-
-                mb.'ns0:AddPayment'('ns0':'http://pochtabank.ru/sas/esp/','ser':'http://schemas.microsoft.com/2003/10/Serialization/')
+                def xmlBuilder = new groovy.xml.StreamingMarkupBuilder()
+                writer = xmlBuilder.bind
                 {
-                    MTI('hhh')
+                    mkp.declareNamespace( ns0: "http://pochtabank.ru/sas/esp/" )
+                    mkp.declareNamespace( ser: "http://schemas.microsoft.com/2003/10/Serialization/" )
+                    mkp.declareNamespace( ent: "urn:AF_ARM_Entities" )
+                    'ns0:AddPayment'
+                    {
+                            'ns0:MessageInfo'
+                            {
+                                'ent:RequestId'('b21C268b-AefD-ae8b-3B4C-ce0FB6CA6bCA') <!-- TODO: брать из JSON  -->
+                                'ent:RequestGenerationTime'('2018-09-30T14:12:16') <!-- TODO: брать из JSON  -->
+                            }
+                            'ns0:Payment'
+                            {
+                                'ent:Id'('b82C268b-AefD-ae8b-3B4C-ce0FB6CA6bCA') <!-- TODO: брать из JSON  -->
+                                'ent:PaymentDate'('2018-09-30T14:12:12') <!-- TODO: брать из JSON  -->
+                                'ent:PaymentNumber'('20180930141212956562_1_D') <!-- TODO: брать из JSON  -->
+                                'ent:ChequeNumber'('0') <!-- TODO: брать из JSON  -->
+                                'ent:Service'('UNIFIELD LLC, Moscow, RU') <!-- TODO: брать из JSON  -->
+                                'ent:Client'('Card') <!-- TODO: брать из JSON  -->
+                                'ent:Point'('Интернет') <!-- TODO: брать из JSON  -->
+                                'ent:Recipient'('Покупка') <!-- TODO: брать из JSON  -->
+                                'ent:Amount'('1100.0') <!-- TODO: брать из JSON  -->
+                                'ent:Commission'('0.0') <!-- TODO: брать из JSON  -->
+                                'ent:Account'('QOfpPdux') <!-- TODO: брать из JSON  -->
+                                'ent:ClientInfo'
+                                {
+                                    'ent:Id'('3216956') <!-- TODO: брать из JSON  -->
+                                }
+                                'ent:Requisites'
+                                {
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('PAN')
+                                            'ent:Value'('1111120102221230') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Номер карты')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('FROMACCT')
+                                            'ent:Value'('hTmnWXPN') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Номер счета, с которого проводилась транзакция')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('CLIENTID')
+                                            'ent:Value'('3216956') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Идентификатор клиента')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('TEMPCARDBLOCK')
+                                            'ent:Value'('true') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Признак «блокировки карты» временным статусом')
+                                     }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('ORIGTIME')
+                                            'ent:Value'('1791567348') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Оригинальное время операции')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('ORIGDATE')
+                                            'ent:Value'('551958453') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Оригинальная дата операции')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('MESSAGETYPEINFO')
+                                            'ent:Value'('120 Authorization Advice') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Тип операции')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('TRANCODEINFO')
+                                            'ent:Value'('110 Покупка') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Код транзакции')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('AMOUNTACCT')
+                                            'ent:Value'('110000') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Сумма транзакции с эквайринговой комиссией в валюте счета')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('CURRENCYACCT')
+                                            'ent:Value'('643') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Код валюты счета клиента')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('TERMNAME')
+                                            'ent:Value'('QOfpPdux') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Имя терминала')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('TERMRETAILERNAME')
+                                            'ent:Value'('17TGII1L') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Идентификатор мерчанта')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('TERMOWNER')
+                                            'ent:Value'('UNIFIELD LLC, Moscow, RU') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Название ТСП (описание владельца терминала)')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('TERMCOUNTRY')
+                                            'ent:Value'('643') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Страна ТСП (ISO код страны терминала)')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('TERMINSTID')
+                                            'ent:Value'('5555555') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Идентификатор эквайера')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('RESPCODEINFO')
+                                            'ent:Value'('68 Транзакция отвергнута внешним хостом') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Код ответа')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('TERMSIC')
+                                            'ent:Value'('7922') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('MCC')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('POSENTRYMODEINFO')
+                                            'ent:Value'('011 manual key entry, can accept PIN') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Point of service entry mode')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('POSCONDITIONINFO')
+                                            'ent:Value'('81 3D-Secure supported only by acquirer') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Point of service condition code')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('GRDATETIME')
+                                            'ent:Value'('') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Дата и время транзакции по Гринвичу')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('ТERMLOCATION')
+                                            'ent:Value'('HwK9CT1:') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Адрес терминала')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('APPROVALCODE')
+                                            'ent:Value'('BEY9sV7M') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Идентификационный код ответа')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('PINOK')
+                                            'ent:Value'('1') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Результат проверки PIN')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('CVVOK')
+                                            'ent:Value'('1') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Результат проверки CVV/CVV2')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('TOACCT')
+                                            'ent:Value'('gMkR7K.D') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Номер целевого счета')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('Check1')
+                                            'ent:Value'('Siebel') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Тип проверки 1')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('Check2')
+                                            'ent:Value'('') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Тип проверки 2')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('StrictCheck')
+                                            'ent:Value'('false') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Строгость проверки')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('CallDirection')
+                                            'ent:Value'('Исходящий звонок') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Направление звонка')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('CardStatus')
+                                            'ent:Value'('Заблокирована') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Текущий статус карты')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('VIP')
+                                            'ent:Value'('NotVIP') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Статус клиента')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('Priority')
+                                            'ent:Value'('100') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Приоритет обработки')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('ScenarioId')
+                                            'ent:Value'('4.2') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Номер сценария')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('AlertDescr')
+                                            'ent:Value'('Подозрительные операции в рисковых сервисах') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Краткое описание условий срабатывания')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('ActionARM')
+                                            'ent:Value'('Позвонить для подтверждения') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Действия при обработке')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('CardBlockReason')
+                                            'ent:Value'('Блокировка в связи с подозрением на мошенничество') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Причина блокировки карты')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('Channel')
+                                            'ent:Value'('CARD') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Канал совершения операции')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('SiebelSpecialCommentFlag')
+                                            'ent:Value'('false') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Признак необходимости отправки специального комментария в Siebel')
+                                    }
+
+                                    'ent:Requisite'
+                                    {
+                                            'ent:Requisite'('SiebelSpecialComment')
+                                            'ent:Value'('') <!-- TODO: брать из JSON  -->
+                                            'ent:DisplayName'('Комментарий для Siebel')
+                                    }
+                                }
+
+                                'ent:Reason'('Подозрительные операции в рисковых сервисах') <!-- TODO: брать из JSON  -->
+                            }
+
+                    }
                 }
 
-                return xmlWriter.toString()
+                return groovy.xml.XmlUtil.serialize(writer)
+
             </groovy>
         </transform>
 
-        <!--<marshal><jacksonxml /></marshal>-->
         <to uri="kafka:{{kafka.integration.esp.to.arm}}"/>
         <to uri="jms:{{arm.mq-queue-name.out}}"/>
     </route>
