@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns0:AddPayment xmlns:ent="urn:AF_ARM_Entities"
+    xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/"
+    xmlns:ns0="http://pochtabank.ru/sas/esp/"
+>
+    <ns0:MessageInfo>
+        <ent:RequestId>b20C268b-AefD-ae8b-3B4C-ce0FB6CA6bCA</ent:RequestId>
+        <ent:RequestGenerationTime>2018-09-30T14:12:16</ent:RequestGenerationTime>
+    </ns0:MessageInfo>
+    <ns0:Payment>
+        <ent:Id>b82C268b-AefD-ae8b-3B4C-ce0FB6CA6bCA</ent:Id>
+        <ent:PaymentDate>2018-09-30T14:12:12</ent:PaymentDate>
+        <ent:PaymentNumber>20180930141212956566_1_D</ent:PaymentNumber>
+        <ent:ChequeNumber>0</ent:ChequeNumber>
+        <ent:Service>TINKOFF QUASICASH, MOSCOW, RU</ent:Service>
+        <ent:Client>Card</ent:Client>
+        <ent:Point>Интернет</ent:Point>
+        <ent:Recipient>Перевод</ent:Recipient>
+        <ent:Amount>1100.0</ent:Amount>
+        <ent:Commission>0.0</ent:Commission>
+        <ent:Account>QOfpPdux</ent:Account>
+        <ent:ClientInfo>
+            <ent:Id>321332</ent:Id>         
+        </ent:ClientInfo>
+        <ent:Requisites>
+            <ent:Requisite>
+                <ent:Name>PAN</ent:Name>
+                <ent:Value>1111170227291230</ent:Value>
+                <ent:DisplayName>Номер карты</ent:DisplayName>
+            </ent:Requisite>
+
+            <ent:Requisite>
+                <ent:Name>FROMACCT</ent:Name>
+                <ent:Value>hTmnWXPN</ent:Value>
+                <ent:DisplayName>Номер счета, с которого проводилась транзакция</ent:DisplayName>
+            </ent:Requisite>
+
+            <ent:Requisite>
+                <ent:Name>CLIENTID</ent:Name>
+                <ent:Value>321332</ent:Value>
+                <ent:DisplayName>Идентификатор клиента</ent:DisplayName>
+            </ent:Requisite>
+
+            <ent:Requisite>
+                <ent:Name>TEMPCARDBLOCK</ent:Name>
+                <ent:Value>true</ent:Value>
+                <ent:DisplayName>Признак «блокировки карты» временным статусом</ent:DisplayName>
+            </ent:Requisite>
+
+            <ent:Requisite>
+                <ent:Name>ORIGTIME</ent:Name>
+                <ent:Value>1791567348</ent:Value>
+                <ent:DisplayName>Оригинальное время операции</ent:DisplayName>
+            </ent:Requisite>
+
+            <ent:Requisite>
+                <ent:Name>ORIGDATE</ent:Name>
+                <ent:Value>551958453</ent:Value>
+                <ent:DisplayName>Оригинальная дата операции</ent:DisplayName>
+            </ent:Requisite>
+
+            <ent:Requisite>
+                <ent:Name>MESSAGETYPEINFO</ent:Name>
+                <ent:Value>120 Authorization Advice</ent:Value>
+                <ent:DisplayName>Тип операции</ent:DisplayName>
+            </ent:Requisite>
+
+            <ent:Requisite>
+                <ent:Name>TRANCODEINFO</ent:Name>
+                <ent:Value>132 Дебетная часть P2P перевода через POS</ent:Value>
+                <ent:DisplayName>Код транзакции</ent:DisplayName>
+            </ent:Requisite>
+
+            <ent:Requisite>
+                <ent:Name>AMOUNTACCT</ent:Name>
+                <ent:Value>110000</ent:Value>
+                <ent:DisplayName>Сумма транзакции с эквайринговой комиссией в валюте
+                    счета</ent:DisplayName>
+            </ent:Requisite>
+
+            <ent:Requisite>
+                <ent:Name>CURRENCYACCT</ent:Name>
+                <ent:Value>643</ent:Value>
+                <ent:DisplayName>Код валюты счета клиента</ent:DisplayName>
+            </ent:Requisite>
+
+            <ent:Requisite>
+                <ent:Name>TERMNAME</ent:Name>
+                <ent:Value>QOfpPdux</ent:Value>
+                <ent:DisplayName>Имя терминала</ent:DisplayName>
+            </ent:Requisite>
+
+            <ent:Requisite>
+                <ent:Name>TERMRETAILERNAME</ent:Name>
+                <ent:Value>17TGII1L</ent:Value>
+                <ent:DisplayName>Идентификатор мерчанта</ent:DisplayName>
+            </ent:Requisite>
+
+            <ent:Requisite>
+                <ent:Name>TERMOWNER</ent:Name>
+                <ent:Value>TINKOFF QUASICASH, MOSCOW, RU</ent:Value>
+                <ent:DisplayName>Название ТСП (описание владельца терминала)</ent:DisplayName>
+            </ent:Requisite>
+
+            <ent:Requisite>
+                <ent:Name>TERMCOUNTRY</ent:Name>
+                <ent:Value>643</ent:Value>
+                <ent:DisplayName>Страна ТСП (ISO код страны терминала)</ent:DisplayName>
+            </ent:Requisite>
+
+            <ent:Requisite>
+                <ent:Name>TERMINSTID</ent:Name>
+                <ent:Value>222222222</ent:Value>
+                <ent:DisplayName>Идентификатор эквайера</ent:DisplayName>
+            </ent:Requisite>
+
+            <ent:Requisite>
+                <ent:Name>RESPCODEINFO</ent:Name>
+                <ent:Value>68 Транзакция отвергнута внешним хостом</ent:Value>
+                <ent:DisplayName>Код ответа</ent:DisplayName>
+            </ent:Requisite>
+
+            <ent:Requisite>
+                <ent:Name>TERMSIC</ent:Name>
+                <ent:Value>6012</ent:Value>
+                <ent:DisplayName>MCC</ent:DisplayName>
+            </ent:Requisite>
+
+            <ent:Requisite>
+                <ent:Name>POSENTRYMODEINFO</ent:Name>
+                <ent:Value>011 manual key entry, can accept PIN</ent:Value>
+                <ent:DisplayName>Point of service entry mode</ent:DisplayName>
+            </ent:Requisite>
+
+            <ent:Requisite>
+                <ent:Name>POSCONDITIONINFO</ent:Name>
+                <ent:Value>81 3D-Secure supported only by acquirer</ent:Value>
+                <ent:DisplayName>Point of service condition code</ent:DisplayName>
+            </ent:Requisite>
+
+            <ent:Requisite>
+                <ent:Name>GRDATETIME</ent:Name>
+                <ent:Value></ent:Value>
+                <ent:DisplayName>Дата и время транзакции по Гринвичу</ent:DisplayName>
+            </ent:Requisite>
+
+            <ent:Requisite>
+                <ent:Name>ТERMLOCATION</ent:Name>
+                <ent:Value>HwK9CT1:</ent:Value>
+                <ent:DisplayName>Адрес терминала</ent:DisplayName>
+            </ent:Requisite>
+
+            <ent:Requisite>
+                <ent:Name>APPROVALCODE</ent:Name>
+                <ent:Value>BEY9sV7M</ent:Value>
+                <ent:DisplayName>Идентификационный код ответа</ent:DisplayName>
+            </ent:Requisite>
+            
+            <ent:Requisite>
+                <ent:Name>PINOK</ent:Name>
+                <ent:Value>1</ent:Value>
+                <ent:DisplayName>Результат проверки PIN</ent:DisplayName>
+            </ent:Requisite>
+            
+            <ent:Requisite>
+                <ent:Name>CVVOK</ent:Name>
+                <ent:Value>1</ent:Value>
+                <ent:DisplayName>Результат проверки CVV/CVV2</ent:DisplayName>
+            </ent:Requisite>
+            
+            <ent:Requisite>
+                <ent:Name>TOACCT</ent:Name>
+                <ent:Value>gMkR7K.D</ent:Value>
+                <ent:DisplayName>Номер целевого счета</ent:DisplayName>
+            </ent:Requisite>
+            
+            <ent:Requisite>
+                <ent:Name>Check1</ent:Name>
+                <ent:Value>Siebel</ent:Value>
+                <ent:DisplayName>Тип проверки 1</ent:DisplayName>
+            </ent:Requisite>
+
+            <ent:Requisite>
+                <ent:Name>Check2</ent:Name>
+                <ent:Value></ent:Value>
+                <ent:DisplayName>Тип проверки 2</ent:DisplayName>
+            </ent:Requisite>
+
+            <ent:Requisite>
+                <ent:Name>StrictCheck</ent:Name>
+                <ent:Value>false</ent:Value>
+                <ent:DisplayName>Строгость проверки</ent:DisplayName>
+            </ent:Requisite>
+            
+            <ent:Requisite>
+                <ent:Name>CallDirection</ent:Name>
+                <ent:Value>Исходящий звонок</ent:Value>
+                <ent:DisplayName>Направление звонка</ent:DisplayName>
+            </ent:Requisite>
+            
+            <ent:Requisite>
+                <ent:Name>CardStatus</ent:Name>
+                <ent:Value>Заблокирована</ent:Value>
+                <ent:DisplayName>Текущий статус карты</ent:DisplayName>
+            </ent:Requisite>
+            
+            <ent:Requisite>
+                <ent:Name>VIP</ent:Name>
+                <ent:Value>NotVIP</ent:Value>
+                <ent:DisplayName>Статус клиента</ent:DisplayName>
+            </ent:Requisite>
+            
+            <ent:Requisite>
+                <ent:Name>Priority</ent:Name>
+                <ent:Value>100</ent:Value>
+                <ent:DisplayName>Приоритет обработки</ent:DisplayName>
+            </ent:Requisite>
+            
+            <ent:Requisite>
+                <ent:Name>ScenarioId</ent:Name>
+                <ent:Value>4.1</ent:Value>
+                <ent:DisplayName>Номер сценария</ent:DisplayName>
+            </ent:Requisite>
+            
+            <ent:Requisite>
+                <ent:Name>AlertDescr</ent:Name>
+                <ent:Value>P2P-debit операции</ent:Value>
+                <ent:DisplayName>Краткое описание условий срабатывания</ent:DisplayName>
+            </ent:Requisite>
+            
+            <ent:Requisite>
+                <ent:Name>ActionARM</ent:Name>
+                <ent:Value>Позвонить для подтверждения</ent:Value>
+                <ent:DisplayName>Действия при обработке</ent:DisplayName>
+            </ent:Requisite>
+            
+            <ent:Requisite>
+                <ent:Name>CardBlockReason</ent:Name>
+                <ent:Value>Блокировка в связи с подозрением на мошенничество</ent:Value>
+                <ent:DisplayName>Причина блокировки карты</ent:DisplayName>
+            </ent:Requisite>
+            
+            <ent:Requisite>
+                <ent:Name>Channel</ent:Name>
+                <ent:Value>CARD</ent:Value>
+                <ent:DisplayName>Канал совершения операции</ent:DisplayName>
+            </ent:Requisite>
+            
+            <ent:Requisite>
+                <ent:Name>SiebelSpecialCommentFlag</ent:Name>
+                <ent:Value>false</ent:Value>
+                <ent:DisplayName>Признак необходимости отправки специального комментария в Siebel</ent:DisplayName>
+            </ent:Requisite>
+            
+            <ent:Requisite>
+                <ent:Name>SiebelSpecialComment</ent:Name>
+                <ent:Value></ent:Value>
+                <ent:DisplayName>Комментарий для Siebel</ent:DisplayName>
+            </ent:Requisite>
+         
+        </ent:Requisites>
+        <ent:Reason>P2P-debit операции</ent:Reason>
+    </ns0:Payment>
+</ns0:AddPayment>
