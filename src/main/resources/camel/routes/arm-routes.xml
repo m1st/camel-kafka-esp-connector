@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes xmlns="http://camel.apache.org/schema/spring" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    <!-- взять сообщение из папки и отправить в IBM MQ для АРМ -->
+    <route id="from_folder_to_arm_test">
+        <from uri="file:{{arm.test.folder.out}}?delete=true"/>
+        <log message="Got new file from {{arm.test.folder.out}}" loggingLevel="INFO"/>
+
+        <to uri="jms:{{arm.mq-queue-name.out}}"/>
+        <log message="File from {{arm.test.folder.out}} successfully put to {{arm.mq-queue-name.out}}" loggingLevel="INFO"/>
+    </route>
+
+</routes>
