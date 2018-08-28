@@ -12,6 +12,16 @@
         <log message="File from {{arm.test.folder.out}} successfully put to {{arm.mq-queue-name.out}}" loggingLevel="INFO"/>
     </route>
 
+
+    <!-- взять сообщение из IBM MQ АРМ и положить во out kafka topic -->
+    <route id="mq_to_kafka_arm_to_esp">
+        <from uri="jms:{{arm.mq-queue-name.in}}"/>
+        <log message="Got new message from {{arm.mq-queue-name.in}}" loggingLevel="INFO"/>
+
+        <to uri="kafka:esp.out.arm.to.esp"/>
+        <log message="File from {{arm.mq-queue-name.in}} successfully put to kafka: esp.out.arm.to.esp" loggingLevel="INFO"/>
+    </route>
+
     <!-- взять сообщение из Kafka topic и отправить в IBM MQ для АРМ -->
     <route id="from_esp_to_arm">
         <from uri="kafka:{{kafka.internal.esp.to.arm}}?groupId=group1&amp;autoOffsetReset=earliest"/>
