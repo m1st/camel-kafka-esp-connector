@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ns0:AddPayment xmlns:ent="urn:AF_ARM_Entities"
     xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/"
-    xmlns:ns0="http://pochtabank.ru/sas/esp/"
->
+    xmlns:ns0="http://pochtabank.ru/sas/esp/">
     <ns0:MessageInfo>
         <ent:RequestId>b21C268b-AefD-ae8b-3B4C-ce0FB6CA6bCA</ent:RequestId>
         <ent:RequestGenerationTime>2018-09-30T14:12:16</ent:RequestGenerationTime>

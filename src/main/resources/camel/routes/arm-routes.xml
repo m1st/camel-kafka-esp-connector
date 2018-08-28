@@ -11,4 +11,30 @@
         <log message="File from {{arm.test.folder.out}} successfully put to {{arm.mq-queue-name.out}}" loggingLevel="INFO"/>
     </route>
 
+    <!-- взять сообщение из Kafka topic и отправить в IBM MQ для АРМ -->
+    <route id="from_esp_to_arm">
+        <from uri="kafka:{{kafka.internal.esp.to.arm}}?groupId=group1&amp;autoOffsetReset=earliest"/>
+        <unmarshal><json library="Fastjson" /></unmarshal>
+        <log message="Got new message from {{kafka.internal.esp.to.arm}}" loggingLevel="INFO"/>
+        <to uri="log:mc_answer?showAll=true&amp;level=INFO"/>
+
+        <transform>
+            <groovy>
+                def xmlWriter = new StringWriter()
+                def mb = new groovy.xml.MarkupBuilder(xmlWriter)
+
+                mb.'ns0:AddPayment'('ns0':'http://pochtabank.ru/sas/esp/','ser':'http://schemas.microsoft.com/2003/10/Serialization/')
+                {
+                    MTI('hhh')
+                }
+
+                return xmlWriter.toString()
+            </groovy>
+        </transform>
+
+        <!--<marshal><jacksonxml /></marshal>-->
+        <to uri="kafka:{{kafka.integration.esp.to.arm}}"/>
+        <to uri="jms:{{arm.mq-queue-name.out}}"/>
+    </route>
+
 </routes>
