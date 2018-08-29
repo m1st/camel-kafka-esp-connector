@@ -3,9 +3,9 @@
         xsi:schemaLocation="http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
     <route id="mc_receive">
-        <from uri="jms:{{mc.mq-queue-name.in}}?disableReplyTo=true"/>
+        <from uri="jms:{{mq.mc-to-esp}}?disableReplyTo=true"/>
 
-        <log message="Got new message from {{mc.mq-queue-name.in}}" loggingLevel="INFO"/>
+        <log message="Got new message from {{mq.mc-to-esp}}" loggingLevel="INFO"/>
         <to uri="log:mc_receive?showAll=true&amp;level=DEBUG"/>
 
         <setHeader headerName="kafka.KEY">
@@ -16,6 +16,7 @@
         </setHeader>
         <to uri="direct:do_receive"/>
     </route>
+
 
     <route id="mc_transform">
         <from uri="direct:mc_transform"/>
@@ -32,18 +33,20 @@
         <marshal><json library="Fastjson"/></marshal>
     </route>
 
-    <route id="mc_test">
-        <from uri="file:{{mc.test.folder.in}}?delete=true"/>
-        <log message="Got new file from {{mc.test.folder.in}}" loggingLevel="INFO"/>
 
-        <to uri="jms:{{mc.mq-queue-name.in}}"/>
-        <log message="File from {{mc.test.folder.in}} successfully put to {{mc.mq-queue-name.in}}" loggingLevel="INFO"/>
+    <route id="mc_test">
+        <from uri="file:{{folder.test-mc-to-esp}}?delete=true"/>
+        <log message="Got new file from {{folder.test-mc-to-esp}}" loggingLevel="INFO"/>
+
+        <to uri="jms:{{mq.mc-to-esp}}"/>
+        <log message="File from {{folder.test-mc-to-esp}} successfully put to {{mq.mc-to-esp}}" loggingLevel="INFO"/>
     </route>
 
+
     <route id="mc_answer">
-        <from uri="kafka:esp.internal.mc.to?groupId=group1&amp;autoOffsetReset=earliest"/>
+        <from uri="kafka:esp.internal.esp.to.mc?groupId=group1"/>
         <unmarshal><json library="Fastjson" /></unmarshal>
-        <log message="Got new message from esp.integration.mc.to" loggingLevel="INFO"/>
+        <log message="Got new message from esp.internal.esp.to.mc" loggingLevel="INFO"/>
         <to uri="log:mc_answer?showAll=true&amp;level=INFO"/>
 
         <transform>
@@ -203,7 +206,7 @@
             </groovy>
         </transform>
 
-        <to uri="kafka:esp.integration.mc.to"/>
-        <to uri="jms:{{mc.mq-queue-name.out}}"/>
+        <to uri="kafka:esp.external.esp.to.mc"/>
+        <to uri="jms:{{mq.esp-to-mc}}"/>
     </route>
 </routes>
