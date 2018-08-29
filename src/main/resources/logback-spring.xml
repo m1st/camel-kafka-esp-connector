@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
+
     <property name="LOGS" value="./logs" />
 
     <appender name="Console"
@@ -14,7 +15,15 @@
 
     <appender name="RollingFile"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOGS}/spring-boot-logger.log</file>
+        <springProfile name="alexey">
+            <file>${LOGS}/spring-boot-logger.log</file>
+        </springProfile>
+        <springProfile name="dev">
+            <file>/opt/sas/env/var/log/spring-boot-logger.log</file>
+        </springProfile>
+        <springProfile name="andrey">
+            <file>/opt/sas/env/var/log/spring-boot-logger.log</file>
+        </springProfile>
         <encoder
                 class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>%d %p %C{1.} [%t] %m%n</Pattern>
