@@ -1,6 +1,7 @@
 package com.glowbyte
 
 import com.ibm.mq.jms.MQConnectionFactory
+import org.apache.camel.CamelContext
 import org.apache.camel.component.jms.JmsComponent
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.SpringApplication
@@ -10,6 +11,10 @@ import org.springframework.context.annotation.Bean
 
 @SpringBootApplication
 class Application {
+
+    @Autowired
+    lateinit var camelContext:CamelContext
+
     @Autowired
     lateinit var cf: MQConnectionFactory
 

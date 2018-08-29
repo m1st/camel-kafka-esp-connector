@@ -4,7 +4,7 @@
 
     <route id="do_receive">
         <from uri="direct:do_receive"/>
-        <toD uri="kafka:esp.integration.${headers.ESPFromSystem}.from"/>
+        <toD uri="kafka:esp.external.${headers.ESPFromSystem}-to-esp"/>
 
         <!-- Hack for newlines and Xerces "Invalid UTF-8 character". -->
         <setBody>
@@ -16,29 +16,37 @@
             <toD uri="validator:xsd/${headers.ESPFromSystem}.xsd"/>
             <log message="Validation successful" loggingLevel="INFO"/>
 
+            <log message="Transforming message..." loggingLevel="INFO"/>
+            <toD uri="direct:${headers.ESPFromSystem}_transform"/>
+            <log message="Successfully transformed message" loggingLevel="INFO"/>
+            <to uri="log:do_receive?showAll=true&amp;level=DEBUG"/>
+
+            <log message="Sending message to Kafka topic ..." loggingLevel="INFO"/>
+            <toD uri="kafka:esp.internal.${headers.ESPFromSystem}-to-esp"/>
+            <log message="Successfully sent message to Kafka topic esp.internal.${headers.ESPFromSystem}-to-esp" loggingLevel="INFO"/>
+
             <doCatch>
                 <exception>org.apache.camel.ValidationException</exception>
-                <handled>
-                    <constant>false</constant>
-                </handled>
+
                 <log message="Validation failed! Exception text follows:\n${exception}" loggingLevel="ERROR"/>
-                <toD uri="kafka:esp.integration.${headers.ESPFromSystem}.from.dlq"/>
+                <toD uri="kafka:esp.dlq.${headers.ESPFromSystem}-to-esp"/>
+            </doCatch>
+            <doCatch>
+                <exception>java.lang.Exception</exception>
+
+                <log message="Validation failed! Exception text follows:\n${exception}" loggingLevel="ERROR"/>
+                <toD uri="kafka:esp.dlq.${headers.ESPFromSystem}-to-esp"/>
             </doCatch>
         </doTry>
-
-        <log message="Transforming message..." loggingLevel="INFO"/>
-        <toD uri="direct:${headers.ESPFromSystem}_transform"/>
-        <log message="Successfully transformed message" loggingLevel="INFO"/>
-        <to uri="log:do_receive?showAll=true&amp;level=DEBUG"/>
-
-        <log message="Sending message to Kafka topic ..." loggingLevel="INFO"/>
-        <toD uri="kafka:esp.internal.${headers.ESPFromSystem}.from"/>
-        <log message="Successfully sent message to Kafka topic esp.internal.${headers.ESPFromSystem}.from" loggingLevel="INFO"/>
     </route>
 
+
+    <!--
     <route id="monitor">
         <from uri="kafka:esp.*?topicIsPattern=true"/>
+
         <to uri="log:monitor?showAll=true&amp;level=INFO"/>
         <toD uri="file:{{monitor.folder}}/$simple{headers['kafka.TOPIC']}/msg_$simple{headers['kafka.KEY']}"/>
     </route>
+    -->
 </routes>
