@@ -13,9 +13,6 @@ import org.springframework.context.annotation.Bean
 class Application {
 
     @Autowired
-    lateinit var camelContext:CamelContext
-
-    @Autowired
     lateinit var cf: MQConnectionFactory
 
     @Bean(name = ["jms"])

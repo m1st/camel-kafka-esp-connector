@@ -10,5 +10,9 @@
         <module name="camel-kafka-rest-connector" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="camel-connector_main" target="1.8" />
+      <module name="camel-connector_test" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
