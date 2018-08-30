@@ -10,8 +10,8 @@
         <to uri="kafka:camel.storage.af.arm.dev.xml"/>
         <log message="File from {{folder.test-esp-to-arm}} successfully put to kafka in camel.storage.af.arm.dev.xml topic" loggingLevel="INFO"/>
 
-        <to uri="jms:{{mq.arm-to-esp}}"/>
-        <log message="File from {{folder.test-esp-to-arm}} successfully put to {{mq.arm-to-esp}}" loggingLevel="INFO"/>
+        <to uri="jms:{{mq.esp-to-arm}}"/>
+        <log message="File from {{folder.test-esp-to-arm}} successfully put to {{mq.esp-to-arm}}" loggingLevel="INFO"/>
     </route>
 
 
