@@ -16,12 +16,49 @@
 
 
     <!-- взять сообщение от АРМ (MQ) и положить в kafka topic -->
-    <route id="mq_to_kafka_arm_to_esp">
-        <from uri="jms:{{mq.arm-to-esp}}"/>
-        <log message="Got new message from {{mq.arm-to-esp}}" loggingLevel="INFO"/>
+    <route id="mq.camel.arm.af.reciver">
+        <from uri="jms:{{mq.arm-to-esp}}?disableReplyTo=true"/>
 
-        <to uri="kafka:camel.storage.arm.af.dev.xml"/>
-        <log message="Message from {{mq.arm-to-esp}} successfully put to kafka in camel.storage.arm.af.dev.xml" loggingLevel="INFO"/>
+        <log message="Got new message from {{mq.arm-to-esp}}" loggingLevel="INFO"/>
+        <to uri="log:mc_receive?showAll=true&amp;level=DEBUG"/>
+
+        <setHeader headerName="kafka.KEY">
+            <xpath resultType="java.lang.String">key</xpath>
+        </setHeader>
+        <setHeader headerName="ESPFromSystem">
+            <constant>arm</constant>
+        </setHeader>
+        <to uri="direct:do_receive"/>
+    </route>
+
+    <!-- взять сообщение от АРМ (MQ) и положить в kafka topic (продолжение...)-->
+    <route id="arm_transform">
+        <from uri="direct:arm_transform"/>
+        <unmarshal><jacksonxml/></unmarshal>
+        <log message="xml в json: ${body}" loggingLevel="INFO"/>
+        <transform>
+            <groovy>
+                /* Hack for empty tags. */
+                //def newBody = request.body.each({ it.value = it.value.trim() }).findAll({ it.value!=null &amp;&amp; it.value!='' })
+
+                //request.body.dump()
+
+                //def newBody = null
+                //newBody['RequestId'] = request.body['MessageInfo']['RequestId']
+                //newBody['opcode'] = 'i'
+
+                //return newBody
+            </groovy>
+        </transform>
+        <marshal><json library="Fastjson"/></marshal>
+    </route>
+
+    <route id="arm_test">
+        <from uri="file:{{folder.test-arm-to-esp}}?delete=true"/>
+        <log message="Got new file from {{folder.test-arm-to-esp}}" loggingLevel="INFO"/>
+
+        <to uri="jms:{{mq.arm-to-esp}}"/>
+        <log message="File from {{folder.test-arm-to-esp}} successfully put to {{mq.arm-to-esp}}" loggingLevel="INFO"/>
     </route>
 
     <!-- взять сообщение из af(Kafka) и отправить в arm (MQ) -->
