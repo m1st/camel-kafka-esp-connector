@@ -6,7 +6,7 @@
 
     <groupId>com.glowbyte</groupId>
     <artifactId>camel-kafka-esp-connector</artifactId>
-    <version>0.6.0-4</version>
+    <version>0.6.0-5</version>
 
     <properties>
         <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>

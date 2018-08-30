@@ -10,8 +10,8 @@
         <to uri="kafka:camel.storage.af.arm.dev.xml"/>
         <log message="File from {{folder.test-esp-to-arm}} successfully put to kafka in camel.storage.af.arm.dev.xml topic" loggingLevel="INFO"/>
 
-        <to uri="jms:{{mq.esp-to-arm}}"/>
-        <log message="File from {{folder.test-esp-to-arm}} successfully put to {{mq.esp-to-arm}}" loggingLevel="INFO"/>
+        <to uri="jms:{{mq.arm-to-esp}}"/>
+        <log message="File from {{folder.test-esp-to-arm}} successfully put to {{mq.arm-to-esp}}" loggingLevel="INFO"/>
     </route>
 
 
@@ -35,21 +35,31 @@
     <route id="arm_transform">
         <from uri="direct:arm_transform"/>
         <unmarshal><jacksonxml/></unmarshal>
-        <log message="xml в json: ${body}" loggingLevel="INFO"/>
+        <log message="xml в object: ${body}" loggingLevel="INFO"/>
+
+        <!-- TODO: преобразую из иерархического списка в плоский список. Пойдет ли так? -->
         <transform>
             <groovy>
-                /* Hack for empty tags. */
-                //def newBody = request.body.each({ it.value = it.value.trim() }).findAll({ it.value!=null &amp;&amp; it.value!='' })
+                def newBody = [:]
 
-                //request.body.dump()
+                newBody['opcode'] = 'i'
 
-                //def newBody = null
-                //newBody['RequestId'] = request.body['MessageInfo']['RequestId']
-                //newBody['opcode'] = 'i'
+                newBody['Id'] = request.body['Payment']['Id']
+                newBody['PaymentNumber'] = request.body['Payment']['PaymentNumber']
+                newBody['Status'] = request.body['Payment']['Status']
+                newBody['PaymentStatusChangeTime'] = request.body['Payment']['PaymentStatusChangeTime']
+                newBody['EmployeeLogin'] = request.body['Payment']['EmployeeLogin']
 
-                //return newBody
+                newBody['RequestId'] = request.body['MessageInfo']['RequestId']
+                newBody['ResponseId'] = request.body['MessageInfo']['ResponseId']
+                newBody['ResponseGenerationTime'] = request.body['MessageInfo']['ResponseGenerationTime']
+                newBody['ResponseCode'] = request.body['MessageInfo']['ResponseCode']
+                newBody['ResponseDescription'] = request.body['MessageInfo']['ResponseDescription']
+
+                return newBody
             </groovy>
         </transform>
+        <log message="xml в new object: ${body}" loggingLevel="INFO"/>
         <marshal><json library="Fastjson"/></marshal>
     </route>
 
