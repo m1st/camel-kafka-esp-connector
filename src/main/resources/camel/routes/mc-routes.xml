@@ -53,6 +53,8 @@
             <groovy>
                 def xmlWriter = new StringWriter()
                 def mb = new groovy.xml.MarkupBuilder(xmlWriter)
+                mb.setOmitNullAttributes(true)
+                mb.setOmitEmptyAttributes(true)
 
                 mb.'ns0:AuthorizationResponse'('ns0': 'urn:AF_MK_Entities')
                 {
